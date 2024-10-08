@@ -1,0 +1,8 @@
+/* Acestea sunt regulile globale care trebuie adăugate într-un fișier CSS obișnuit */
+.active {
+    @apply bg-white/30 text-white font-bold; /* Stilul pentru butonul activ */
+}
+
+.inactive {
+    @apply bg-[#BBA5AF]/30 text-gray-300; /* Stilul pentru butonul inactiv */
+}
