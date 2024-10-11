@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/Button'
-// import { ButtonAdd } from '@/components/ui/ButtonAdd'
 
 import { useActions } from '@/hooks/useActions'
 import { useCart } from '@/hooks/useCart'
@@ -20,20 +19,21 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
 	return (
 		<Button
-			variant='primary'
-			size='lg'
-			className="bg-gradient-to-r from-pink-300 to-orange-300 text-black rounded-full max-w-[393px] w-full font-heebo"
-			onClick={() =>
-				currentElement
-					? removeFromCart({ id: currentElement.id })
-					: addToCart({
-							product,
-							quantity: 1,
-							price: product.price
-						})
-			}
+		variant='primary'
+		size='lg'
+		className="bg-gradient-to-r from-pink-300 to-orange-300 text-black rounded-full md:w-[393px] w-full font-heebo" // w-full pentru mobil
+		onClick={() =>
+			currentElement
+			? removeFromCart({ id: currentElement.id })
+			: addToCart({
+					product,
+					quantity: 1,
+					price: product.price
+				})
+		}
 		>
 			{currentElement ? 'Remove from Bag' : 'Add to Bag'}
 		</Button>
+
 	)
 }

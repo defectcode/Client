@@ -1,13 +1,8 @@
 import { Minus, Plus } from 'lucide-react'
-
 import { Button } from '@/components/ui/Button'
-
 import { useActions } from '@/hooks/useActions'
 import { useCart } from '@/hooks/useCart'
-
 import { ICartItem } from '@/shared/types/cart.interface'
-
-import styles from '../HeaderCart.module.scss'
 
 interface CartActionsProps {
 	item: ICartItem
@@ -15,12 +10,11 @@ interface CartActionsProps {
 
 export function CartActions({ item }: CartActionsProps) {
 	const { changeQuantity } = useActions()
-
 	const { items } = useCart()
 	const quantity = items.find(cartItem => cartItem.id === item.id)?.quantity
 
 	return (
-		<div className={styles.actions}>
+		<div className="flex items-center mt-1">
 			<Button
 				onClick={() => changeQuantity({ id: item.id, type: 'minus' })}
 				variant='ghost'
@@ -30,7 +24,12 @@ export function CartActions({ item }: CartActionsProps) {
 				<Minus />
 			</Button>
 
-			<input disabled readOnly value={quantity} />
+			<input
+				disabled
+				readOnly
+				value={quantity}
+				className="w-10 text-center text-sm"
+			/>
 
 			<Button
 				onClick={() => changeQuantity({ id: item.id, type: 'plus' })}

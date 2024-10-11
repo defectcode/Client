@@ -22,7 +22,6 @@ export function ProductGallery({ product }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col lg:flex-row lg:space-x-4">
-      {/* Miniaturile (thumbnails) - afișate doar pe desktop */}
       <div className="hidden lg:flex lg:flex-col gap-4 lg:overflow-y-auto lg:h-[500px] justify-center lg:justify-start">
         {product.images.map((image: string, index: number) => (
           <button
@@ -33,8 +32,8 @@ export function ProductGallery({ product }: ProductGalleryProps) {
               index === currentIndex ? 'border-black' : 'border-transparent'
             )}
           >
-            <Image src={image} alt={product.title} width={80} height={80} />
-          </button>
+        <Image src={image} alt={product.title} layout="responsive" width={80} height={80} />
+        </button>
         ))}
       </div>
 
