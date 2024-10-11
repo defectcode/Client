@@ -23,7 +23,6 @@ export function HeaderMenu() {
 
 	return (
 		<div className={styles.header_menu}>
-			<HeaderCart />
 			<div className='border-transparent h-[30px] flex items-center justify-around rounded-[10px] max-w-[317px] w-full bg-black/20 text-white'>
 				<Link href={PUBLIC_URL.home()}>
 					<Button variant='ghost' className={`border-transparent h-[26px] rounded-[10px] w-[103px] ${currentPath === PUBLIC_URL.home() ? 'bg-[#BBA5AF]/30 text-white font-bold' : 'bg-transparent text-white'}`}>
@@ -39,6 +38,9 @@ export function HeaderMenu() {
 					<Button variant='ghost' className={`border-transparent h-[26px] rounded-[10px] w-[103px] ${currentPath === PUBLIC_URL.about() ? 'bg-white/30 text-white font-bold' : 'bg-transparent text-white'}`}>
 						About
 					</Button>
+				</Link>
+				<Link href={PUBLIC_URL.explorer()}>
+					<Button variant='ghost'>Каталог</Button>
 				</Link>
 			</div>
 			{isLoading ? (

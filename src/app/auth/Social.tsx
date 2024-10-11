@@ -10,10 +10,11 @@ export function Social() {
 	const router = useRouter()
 
 	return (
-		<div className={styles.social}>
+		<div className='space-y-3 w-full mt-5 flex justify-center items-center'>
 			<Button
 				variant='outline'
 				onClick={() => router.push(`${SERVER_URL}/auth/google`)}
+				className='gap-1'
 			>
 				<FcGoogle />
 				Continue via Google

@@ -10,3 +10,4 @@ export const useCart = () => {
 
 	return { items, total }
 }
+

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/form-elements/Input'
 
 import { PUBLIC_URL } from '@/config/url.config'
+import Image from 'next/image'
 
 export function SearchInput() {
 	const [searchTerm, setSearchTerm] = useState<string>('')
@@ -36,9 +37,9 @@ export function SearchInput() {
 						setSearchVisible(prev => !prev)
 					}
 				}}
-				className="ml-2 rounded-full bg-black/20 text-white px-4 py-2"
+				className="ml-2 rounded-full bg-transparent text-white px-4 py-2"
 			>
-				Search
+				<Image src='/images/search.svg' alt='search' width={15} height={15}/>
 			</Button>
 		</div>
 	)

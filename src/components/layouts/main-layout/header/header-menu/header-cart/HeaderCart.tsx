@@ -1,63 +1,64 @@
-import { useRouter } from 'next/navigation'
+'use client';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/Button';
+import { Heading } from '@/components/ui/Heading';
 
-import { Button } from '@/components/ui/Button'
-import { Heading } from '@/components/ui/Heading'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/Sheet'
+import { PUBLIC_URL } from '@/config/url.config';
 
-import { PUBLIC_URL } from '@/config/url.config'
+import { useCart } from '@/hooks/useCart';
+import { useProfile } from '@/hooks/useProfile';
 
-import { useCart } from '@/hooks/useCart'
-import { useProfile } from '@/hooks/useProfile'
+import { formatPrice } from '@/utils/string/format-price';
 
-import { formatPrice } from '@/utils/string/format-price'
-
-import styles from './HeaderCart.module.scss'
-import { CartItem } from './cart-item/CartItem'
-import { useCheckout } from './useCheckout'
+import { CartItem } from './cart-item/CartItem';
+import { useCheckout } from './useCheckout';
+import  PayPalButton from './cart-item/PayPalButton';
+import CheckoutButton from '@/app/checkout/ButtonCheckout';
 
 export function HeaderCart() {
-	const router = useRouter()
+  const router = useRouter();
+  const { createPayment, isLoadingCreate } = useCheckout();
+  const { user } = useProfile();
+  const { items, total } = useCart();
 
-	const { createPayment, isLoadingCreate } = useCheckout()
-	const { user } = useProfile()
+  const handleClick = () => {
+    user ? createPayment() : router.push(PUBLIC_URL.auth());
+  };
 
-	const { items, total } = useCart()
+  return (
+    <div className="flex flex-col max-w-[430px] w-full p-4 bg-white shadow-lg rounded-lg">
+      <Heading title="Shopping Cart" className="text-xl mb-4" />
+      <div className="flex flex-col w-full flex-1">
+        {items.length ? (
+          <div className="max-h-[280px] overflow-y-auto">
+            {items.map((item) => (
+              <CartItem item={item} key={item.id} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-sm text-muted-foreground">The cart is empty!</div>
+        )}
+      </div>
+      {items.length ? (
+        <>
+          <div className="text-lg font-medium mt-4 flex items-center justify-between">
+            <p>Total to be paid:</p>
+            {formatPrice(total)}
+          </div>
+          {/* <Button
+            onClick={handleClick}
+            variant="primary"
+            disabled={isLoadingCreate}
+            className="w-full mt-4 bg-black hover:bg-gray-700"
+          >
+            Proceed to payment
+          </Button>
 
-	const handleClick = () => {
-		user ? createPayment() : router.push(PUBLIC_URL.auth())
-	}
-
-	return (
-		<Sheet>
-			<SheetTrigger asChild>
-				{/* <Button variant='ghost'>Basket</Button> */}
-			</SheetTrigger>
-			<SheetContent className={styles.cart}>
-				<Heading title='Shopping Cart' className='text-xl' />
-				<div className={styles.items}>
-					{items.length ? (
-						items.map(item => (
-							<CartItem item={item} key={item.id} />
-						))
-					) : (
-						<div className={styles.not_found}>The cart is empty!</div>
-					)}
-				</div>
-				{items.length ? (
-					<>
-						<div className={styles.total}>
-							Total to be paid: {formatPrice(total)}
-						</div>
-						<Button
-							onClick={handleClick}
-							variant='primary'
-							disabled={isLoadingCreate}
-						>
-							Proceed to payment
-						</Button>
-					</>
-				) : null}
-			</SheetContent>
-		</Sheet>
-	)
+          {/* PayPal Button */}
+          {/* <PayPalButton totalAmount={total} /> */} 
+		  <CheckoutButton />
+        </>
+      ) : null}
+    </div>
+  );
 }

@@ -8,16 +8,15 @@ import { Product } from './Product'
 export const revalidate = 60
 
 export async function generateStaticParams() {
-	const products = await productService.getAll()
-
-	const paths = products.map(product => {
-		return {
-			params: { id: product.id }
-		}
-	})
-
-	return paths
-}
+	const products = await productService.getAll();
+  
+	const paths = products.map(product => ({
+	  params: { id: product.id }
+	}));
+  
+	return paths;
+  }
+  
 
 async function getProducts(params: { id: string }) {
 	try {

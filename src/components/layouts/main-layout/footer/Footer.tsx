@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import './Footer.css'
 
 export interface FooterInfo {
   title: string;
@@ -38,29 +39,30 @@ const footerData: FooterInfo[] = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-white py-10">
+    <footer className="bg-white pb-10 md:py-10">
       <div className="max-w-[1400px] mx-auto w-full px-4 lg:px-0">
         {/* Container principal pentru secțiuni și logo */}
-        <div className="flex justify-between items-start w-full">
+        <div className="flex md:flex-nowrap flex-wrap md:justify-between justify-center items-start w-full ">
           {/* Secțiuni Footer */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-20">
-            {footerData.map((section) => (
-              <div key={section.title}>
-                <h3 className="text-[16px] font-heebo mb-4">{section.title}</h3>
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <Link legacyBehavior href={link.href}>
-                        <a className="text-sm font-heebo text-[#BDBDBD] hover:text-gray-900">
-                          {link.name}
-                        </a>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-20 footer-sections">
+          {footerData.map((section) => (
+            <div key={section.title}>
+              <h3 className="text-[16px] font-heebo mb-4">{section.title}</h3>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <Link legacyBehavior href={link.href}>
+                      <a className="text-sm font-heebo text-[#BDBDBD] hover:text-gray-900">
+                        {link.name}
+                      </a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
 
           {/* Logo și Newsletter */}
           <div className="flex flex-col items-start max-w-[350px] lg:max-w-[400px]">
@@ -82,7 +84,7 @@ export const Footer = () => {
         </div>
 
         {/* Metode de plată și alte secțiuni */}
-        <div className='flex items-center justify-between mt-12'>
+        <div className='flex flex-wrap md:flex-nowrap items-center md:justify-between justify-center mt-12 gap-5 md:gap-0 mb-5 md:mb-0'>
           {/* Metode de plată */}
           <div className="flex justify-center space-x-4">
             <Image src="/images/footer/applepay-card.svg" alt="Apple Pay" width={50} height={28} />

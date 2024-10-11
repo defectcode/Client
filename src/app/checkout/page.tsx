@@ -1,12 +1,14 @@
-import React from 'react';
+import type { Metadata } from 'next'
 
-const CheckoutPage: React.FC = () => {
-  return (
-    <div>
-      <h1>Checkout</h1>
-      <p>Finalizează comanda ta aici.</p>
-    </div>
-  );
-};
+import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 
-export default CheckoutPage;
+import { Checkout } from './Checkout';
+
+export const metadata: Metadata = {
+	title: 'Checkout',
+	...NO_INDEX_PAGE
+}
+
+export default function CheckoutPage() {
+	return <Checkout />
+}
