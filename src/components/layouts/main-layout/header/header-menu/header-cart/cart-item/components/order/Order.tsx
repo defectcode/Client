@@ -15,17 +15,11 @@ export default function Order({ items }: PaymentProps) {
   const [expiryError, setExpiryError] = useState('');
   const [cvvError, setCvvError] = useState('');
 
-  // Taxe și livrare
-  const taxRate = 0.2; // 20% taxă
-
-  // Calculăm suma totală a produselor din coș
+  const taxRate = 0.2; 
   const subtotal = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-
-  // Calculăm taxele și totalul final
   const estimatedTax = subtotal * taxRate;
-  const total = subtotal + estimatedTax; // Total final (inclusiv taxele și livrarea)
+  const total = subtotal + estimatedTax;
 
-  // Luhn Algorithm to validate card number
   const validateCardNumber = (card: string) => {
     const cardNumber = card.replace(/\D/g, ''); // Remove non-digits
     let sum = 0;
