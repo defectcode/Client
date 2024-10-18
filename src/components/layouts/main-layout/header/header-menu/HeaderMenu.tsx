@@ -39,42 +39,7 @@ export function HeaderMenu() {
 						About
 					</Button>
 				</Link>
-				<Link href={PUBLIC_URL.explorer()}>
-					<Button variant='ghost'>Каталог</Button>
-				</Link>
 			</div>
-			{isLoading ? (
-				<Loader size='sm' />
-			) : user ? (
-				<>
-					<Link href={PUBLIC_URL.shop()}>
-					</Link>
-					{user.stores.length ? (
-						<div>
-						</div>
-					) : (
-						<CreateStoreModal>
-							<Button variant='ghost'>Create a store</Button>
-						</CreateStoreModal>
-					)}
-					<Link href={DASHBOARD_URL.home()}>
-						<Image
-							src={user.picture}
-							alt={user.name}
-							width={42}
-							height={42}
-							className={`${styles.avatar} ${currentPath === DASHBOARD_URL.home() ? 'border-2 border-white' : ''}`} // Iconiță activă
-						/>
-					</Link>
-				</>
-			) : (
-				<Link href={PUBLIC_URL.auth()}>
-					<Button variant='primary'>
-						<LogOut className={`${styles.icon} ${currentPath === PUBLIC_URL.auth() ? 'text-white' : 'text-gray-300'}`} />
-						Login
-					</Button>
-				</Link>
-			)}
 		</div>
 	)
 }

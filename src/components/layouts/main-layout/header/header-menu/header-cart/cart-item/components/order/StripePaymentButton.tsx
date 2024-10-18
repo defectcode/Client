@@ -3,7 +3,13 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import Image from 'next/image';
 
-const stripePromise = loadStripe('pk_live_51PVr8jHWwCgaMkWC2FxRlLTyTfpq4Qa0fvwWgwIwEPSP3Lt9EA6R8773ZboJNxRXSP1JMbAXmGql0VzAqFEOINGI0039gBmnca'); // Înlocuiește cu cheia publică Stripe
+const stripePublicKey = process.env.STRIPE_PUBLISHABLE_KEY;
+
+if (!stripePublicKey) {
+  throw new Error('Stripe public key is not defined in environment variables.');
+}
+
+const stripePromise = loadStripe(stripePublicKey);
 
 const CheckoutForm: React.FC = () => {
   const stripe = useStripe();
