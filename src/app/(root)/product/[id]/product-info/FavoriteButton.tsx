@@ -41,7 +41,7 @@ export function FavoriteButton({ product }: FavoriteButtonProps) {
 			disabled={isPending}
 		>
 			{isExists ? (
-				<AiFillHeart color='#F43F5E' className='size-5' />
+				<AiFillHeart color='#8C8C8C' className='size-5' />
 			) : (
 				<AiOutlineHeart className='size-5' />
 			)}

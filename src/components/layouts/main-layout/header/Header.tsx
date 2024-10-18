@@ -40,12 +40,12 @@ export function Header() {
 
       {isCartOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-5 rounded-lg shadow-lg max-w-[430px] w-full relative">
+          <div className="bg-white rounded-lg shadow-lg max-w-[430px] w-full relative">
             <button 
-              className="absolute top-2 right-2 text-2xl font-bold" 
+              className="absolute top-5 right-5 text-2xl font-bold" 
               onClick={toggleCart}
             >
-              &times;
+              <Image src='/images/close.svg' alt='close' width={12} height={12}/>
             </button>
             <HeaderCart />
           </div>
