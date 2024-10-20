@@ -46,7 +46,7 @@ export function Categories() {
 						/>
 						<div className={styles.buttons}>
 							<Link
-								href={STORE_URL.categoryCreate(params.storeId)}
+								href={STORE_URL.categoryCreate(params?.storeId)}
 							>
 								<Button variant='primary'>
 									<Plus />
