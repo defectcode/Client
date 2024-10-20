@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next build && next start -p $PORT",
+    "build": "next build && prisma migrate deploy",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
