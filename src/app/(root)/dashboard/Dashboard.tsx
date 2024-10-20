@@ -26,7 +26,7 @@ export function Dashboard() {
 	const searchParams = useSearchParams()
 
 	useEffect(() => {
-		const accessToken = searchParams.get('accessToken')
+		const accessToken = searchParams?.get('accessToken')
 
 		if (accessToken) saveTokenStorage(accessToken)
 	}, [searchParams])
