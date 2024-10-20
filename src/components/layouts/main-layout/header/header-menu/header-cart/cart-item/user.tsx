@@ -47,10 +47,10 @@ export function User() {
 				</>
 			) : (
 				<Link href={PUBLIC_URL.auth()}>
-					<Button variant='primary'>
+					<button className='flex items-center justify-center text-[#7C788A]' >
 						<LogOut className={`${styles.icon} ${currentPath === PUBLIC_URL.auth() ? 'text-white' : 'text-gray-300'}`} />
 						Login
-					</Button>
+					</button>
 				</Link>
 			)}
         </Button>

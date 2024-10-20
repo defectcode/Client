@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import PayPalButton from '../../PayPalButton';
+import CheckoutPage from './StripePaymentButton';
 
 interface PaymentProps {
   items: any[]; // Ar trebui să fie ICartItem[], dar depinde de datele tale reale
@@ -40,23 +41,28 @@ export default function Order({ items }: PaymentProps) {
     return sum % 10 === 0;
   };
 
-  // Validate expiry date is in MM/YY format and is not in the past
   const validateExpiryDate = (expiry: string) => {
-    const regex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
+    // Acceptă atât formatul MM/YY cât și MM/YYYY
+    const regex = /^(0[1-9]|1[0-2])\/(\d{2}|\d{4})$/;
     if (!regex.test(expiry)) return false;
-
+  
     const [month, year] = expiry.split('/');
     const expiryMonth = parseInt(month);
-    const expiryYear = parseInt(`20${year}`); // Assuming the year is provided in YY format
-
+    let expiryYear = parseInt(year);
+  
+    // Dacă anul este în format de 2 cifre, îl transformăm în 4 cifre (ex. 28 devine 2028)
+    if (year.length === 2) {
+      expiryYear += 2000;
+    }
+  
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
-
+  
     return !(expiryYear < currentYear || (expiryYear === currentYear && expiryMonth < currentMonth));
   };
+  
 
-  // Handle input changes and validate the form
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardNumber(e.target.value);
     const isValid = validateCardNumber(e.target.value);
@@ -77,17 +83,27 @@ export default function Order({ items }: PaymentProps) {
 
   const isFormValid = !cardError && !expiryError && !cvvError && cardNumber && expiryDate && cvv;
 
+  const handleCardPayment = () => {
+    if (isFormValid) {
+      // Logica de procesare a plății cu cardul
+      console.log('Processing card payment...');
+      // Adaugă aici logica necesară pentru integrarea plății
+    } else {
+      alert('Please fill in all card details correctly.');
+    }
+  };
+
   return (
     <div className="py-5 bg-white max-w-[511px] w-full mx-auto">
       <h2 className="text-xl font-semibold mb-4">Payment</h2>
 
-      {/* Select payment method */}
       <div className="flex items-center justify-center space-x-4 mb-6">
         <button
           className={`py-2 px-4 border h-[56px] w-1/3 flex items-center justify-center ${selectedPaymentMethod === 'ApplePay' ? 'border-black' : 'border-gray-300'} rounded-lg`}
           onClick={() => setSelectedPaymentMethod('ApplePay')}
         >
           <Image src='/images/applepay.svg' alt='applepay' width={42} height={16} />
+          <CheckoutPage />
         </button>
 
         <button
@@ -96,7 +112,6 @@ export default function Order({ items }: PaymentProps) {
         >
           💳 Card
         </button>
-
         <button
           className={`py-2 px-4 border h-[56px] w-1/3 flex items-center justify-center ${selectedPaymentMethod === 'PayPal' ? 'border-black' : 'border-gray-300'} rounded-lg`}
           onClick={() => setSelectedPaymentMethod('PayPal')}
@@ -105,7 +120,6 @@ export default function Order({ items }: PaymentProps) {
         </button>
       </div>
 
-      {/* Payment details */}
       {selectedPaymentMethod === 'Card' && (
         <div className="mb-6">
           <h3 className="font-semibold mb-2">Card details</h3>
@@ -144,17 +158,19 @@ export default function Order({ items }: PaymentProps) {
         </div>
       )}
 
-      {/* PayPal Button */}
       {selectedPaymentMethod === 'PayPal' && (
         <div className="w-full">
           <PayPalButton totalAmount={total} />
         </div>      
       )}
 
-      {/* Order Button */}
-      {isFormValid && selectedPaymentMethod === 'Card' && (
-        <button className="py-2 px-4 bg-green-500 text-white rounded-lg mt-4 w-full">
-          Order (${total.toFixed(2)})
+      {selectedPaymentMethod === 'Card' && (
+        <button
+          onClick={handleCardPayment}
+          className={`bg-gray-700 text-white py-2 rounded-md mt-4 w-full ${!isFormValid ? 'opacity-50 cursor-not-allowed ' : 'hover:bg-gray-800'}`}
+          disabled={!isFormValid}
+        >
+          Pay ${total.toFixed(2)}
         </button>
       )}
     </div>

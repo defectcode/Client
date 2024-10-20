@@ -256,14 +256,15 @@ export function Checkout() {
                 <div className="flex flex-col gap-4 mb-6">
                   <div className="flex gap-5 h-[56px]">
                     <button className="w-full py-2 border rounded-[10px] flex items-center justify-center">
-                      {/* <PayPalButton totalAmount={totalAmount} /> */}
-                    <Image src='/images/paypal.svg' alt='PayPal' width={48} height={13} />
+                      <Image src='/images/paypal.svg' alt='PayPal' width={48} height={13} />
                     </button>
                     <button className="w-full py-2 border rounded-[10px] flex items-center justify-center">
                       <Image src='/images/applepay.svg' alt='Apple Pay' width={42} height={16} />
+                      <CheckoutPage/>
                     </button>
                     <button className="w-full py-2 border rounded-[10px] flex items-center justify-center">
                       <Image src='/images/amazonpay.svg' alt='Amazon Pay' width={81} height={15} />
+                      <CheckoutPage/>
                     </button>
                   </div>
                 </div>
