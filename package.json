@@ -2,7 +2,7 @@
   "name": "client-side",
   "version": "0.1.0",
   "private": true,
-"scripts": {
+  "scripts": {
     "build": "next build",
     "start": "next start -p $PORT",
     "dev": "next dev"
