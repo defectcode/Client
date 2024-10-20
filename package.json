@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+  "build": "next build",
+  "start": "next start -p $PORT",
+  "dev": "next dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
