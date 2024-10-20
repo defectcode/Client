@@ -782,13 +782,6 @@
     javascript-natural-sort "0.7.1"
     lodash "^4.17.21"
 
-"@types/bun@latest":
-  version "1.1.10"
-  resolved "https://registry.npmjs.org/@types/bun/-/bun-1.1.10.tgz"
-  integrity sha512-76KYVSwrHwr9zsnk6oLXOGs9KvyBg3U066GLO4rk6JZk1ypEPGCUDZ5yOiESyIHWs9cx9iC8r01utYN32XdmgA==
-  dependencies:
-    bun-types "1.1.29"
-
 "@types/country-list@^2.1.4":
   version "2.1.4"
   resolved "https://registry.npmjs.org/@types/country-list/-/country-list-2.1.4.tgz"
@@ -850,15 +843,8 @@
   resolved "https://registry.npmjs.org/@types/js-cookie/-/js-cookie-3.0.6.tgz"
   integrity sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==
 
-"@types/node@*", "@types/node@^20", "@types/node@>=8.1.0":
+"@types/node@^20", "@types/node@>=8.1.0":
   version "20.14.11"
-  dependencies:
-    undici-types "~5.26.4"
-
-"@types/node@~20.12.8":
-  version "20.12.14"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.12.14.tgz"
-  integrity sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg==
   dependencies:
     undici-types "~5.26.4"
 
@@ -880,13 +866,6 @@
   version "0.0.3"
   resolved "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
   integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
-
-"@types/ws@~8.5.10":
-  version "8.5.12"
-  resolved "https://registry.npmjs.org/@types/ws/-/ws-8.5.12.tgz"
-  integrity sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==
-  dependencies:
-    "@types/node" "*"
 
 abbrev@^2.0.0:
   version "2.0.0"
@@ -982,14 +961,6 @@ braces@^3.0.3, braces@~3.0.2:
   integrity sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==
   dependencies:
     fill-range "^7.1.1"
-
-bun-types@1.1.29:
-  version "1.1.29"
-  resolved "https://registry.npmjs.org/bun-types/-/bun-types-1.1.29.tgz"
-  integrity sha512-En3/TzSPMPyl5UlUB1MHzHpcrZDakTm7mS203eLoX1fBoEa3PW+aSS8GAqVJ7Is/m34Z5ogL+ECniLY0uDaCPw==
-  dependencies:
-    "@types/node" "~20.12.8"
-    "@types/ws" "~8.5.10"
 
 busboy@1.6.0:
   version "1.6.0"
