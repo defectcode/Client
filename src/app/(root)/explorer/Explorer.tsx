@@ -15,7 +15,7 @@ interface ExplorerProps {
 
 export function Explorer({ products }: ExplorerProps) {
 	const searchParams = useSearchParams()
-	const searchTerm = searchParams.get('searchTerm')
+	const searchTerm = searchParams?.get('searchTerm')
 
 	const { data } = useQuery({
 		queryKey: ['product explorer', searchTerm],
