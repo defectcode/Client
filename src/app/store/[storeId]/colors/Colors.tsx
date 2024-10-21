@@ -48,7 +48,7 @@ export function Colors() {
 							description='All colors of your store'
 						/>
 						<div className={styles.buttons}>
-							<Link href={STORE_URL.colorCreate(params.storeId)}>
+							<Link href={STORE_URL.colorCreate(params?.storeId)}>
 								<Button variant='primary'>
 									<Plus />
 									Create
