@@ -74,7 +74,7 @@ export function CheckoutCart() {
               <span>{formatPrice(estimatedTax)}</span>
             </div>
             <div className="text-lg font-bold mt-4 flex items-center justify-between font-heebo text-[16px] text-[#111111]">
-              <p>Total:</p>
+              <p>Totaldsds:</p>
               {formatPrice(finalTotal)}
             </div>
           </div>
@@ -84,7 +84,7 @@ export function CheckoutCart() {
       {/* Butonul pentru a deschide sumarul comenzii, doar pe mobil */}
       <div className="block md:hidden mb-4">
         <div
-          className="flex items-center justify-between cursor-pointer px-5 py-4 bg-white border rounded-lg"
+          className="flex items-center justify-between cursor-pointer px-5 py-4 bg-white md:border md:rounded-lg"
           onClick={handleToggleSummary}
         >
           <h2 className="text-[16px] font-heebo">Show order summary</h2>
@@ -94,12 +94,6 @@ export function CheckoutCart() {
 
       {/* Structura desktop rămâne neschimbată */}
       <div className="md:block hidden">
-        <h2 className="text-[20px] font-semibold font-heebo mb-4 text-[#424242]">Delivery Method</h2>
-        <div className="flex items-center justify-between border p-5 rounded-[10px] mb-10 h-[56px]">
-          <h3 className="text-[#1E1E1E] font-heebo font-semibold text-[16px]">Delivers Oct 22 - Oct 29</h3>
-          <p className="text-[#8C8C8C] font-heebo font-medium text-[14px]">FREE</p>
-        </div>
-
         <div className="py-4 bg-white border rounded-lg max-w-[430px] mx-auto">
           <div className="flex items-center justify-between cursor-pointer px-5" onClick={handleToggleSummary}>
             <h2 className="text-[16px] font-heebo">Show order summary</h2>

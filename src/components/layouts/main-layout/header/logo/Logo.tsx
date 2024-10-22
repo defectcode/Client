@@ -12,6 +12,7 @@ export function Logo() {
 				alt={SITE_NAME}
 				width={95}
 				height={70}
+				style={{ lineHeight: '40px' }}
 			/>
 			{/* <div className="text-2xl font-bold text-black">{SITE_NAME}</div> */}
 		</Link>

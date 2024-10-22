@@ -6,8 +6,8 @@ const config = {
 		'./pages/**/*.{ts,tsx}',
 		'./components/**/*.{ts,tsx}',
 		'./app/**/*.{ts,tsx}',
-		'./src/**/*.{ts,tsx}'
-	],
+		'./src/**/*.{ts,tsx}',
+	],	  
 	prefix: '',
 	theme: {
 		container: {
@@ -18,6 +18,9 @@ const config = {
 			}
 		},
 		extend: {
+			lineHeight: {
+				'16': '16px',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

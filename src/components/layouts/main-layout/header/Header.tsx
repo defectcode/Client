@@ -33,11 +33,6 @@ export function Header() {
       </div>
       <div className="flex-1 flex items-center justify-end lg:flex hidden">
         <SearchInput />
-        {/* <Link href={DASHBOARD_URL.favorites()}>
-          <Button variant="ghost">
-            <Image src="/images/shop.svg" alt="shop" width={15} height={17} />
-          </Button>
-        </Link> */}
         <User />
         <Button variant="ghost" onClick={toggleCart}>
           <Image src="/images/shop.svg" alt="shop" width={15} height={17} />
@@ -58,11 +53,6 @@ export function Header() {
             </button>
             <HeaderMenu />
             <SearchInput />
-            {/* <Link href={DASHBOARD_URL.favorites()}>
-              <Button variant="ghost">
-                <Image src="/images/shop.svg" alt="shop" width={15} height={17} />
-              </Button>
-            </Link> */}
             <User />
             <Button variant="ghost" onClick={toggleCart}>
               <Image src="/images/shop.svg" alt="shop" width={15} height={17} />
