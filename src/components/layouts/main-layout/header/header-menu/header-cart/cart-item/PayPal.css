@@ -64,3 +64,74 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #8c8c8c; /* Culoarea thumb-ului la hover */
 }
+
+
+
+
+.font-Heebo-24 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #1E1E1E;
+}
+
+.font-Heebo-20 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #1E1E1E;
+}
+
+.font-Heebo-16 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #1E1E1E;
+}
+
+.font-Heebo-14 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  color: #1E1E1E;
+}
+
+.font-Heebo-reg-14 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  color: #1E1E1E;
+}
+
+.font-Heebo-med-16 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #1E1E1E;
+}
+
+
+.font-Heebo-med-15 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.font-Heebo-med {
+  font-family: 'Heebo', sans-serif;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.font-Heebo-reg {
+  font-family: 'Heebo', sans-serif;
+  font-weight: 400;
+  line-height: 14px;
+}

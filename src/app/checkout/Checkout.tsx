@@ -258,9 +258,9 @@ export function Checkout() {
         <div className="w-full max-w-[620px] flex flex-col gap-10 justify-center items-center py-4 sm:p-6 mb-6 lg:mb-0">
           <div className="w-full max-w-[511px]">
             <div className="mb-4">
-              <h2 className="text-[20px] font-semibold font-heebo mb-4 text-[#424242] leading-[20px]">When will your order arrive?</h2>
+              <h2 className="font-Heebo-20 mb-4 text-[#424242]">When will your order arrive?</h2>
               <div className="flex items-center justify-between border p-5 rounded-[10px] mb-10 h-[56px]">
-                <h3 className="text-[#1E1E1E] font-heebo font-semibold text-[16px] leading-[16px]">Delivers Oct 22 - Oct 29</h3>
+                <h3 className="text-[#1E1E1E] font-Heebo-16 ">Arrives Wed, Oct 22 - Oct 29</h3>
                 <p className="text-[#8C8C8C] font-heebo font-medium text-[14px] leading-[14px]">FREE</p>
               </div>
             </div>
@@ -268,18 +268,18 @@ export function Checkout() {
             <div className="w-full lg:w-1/3 md:p-4 md:hidden block border-y">
               {/* <CheckoutCart /> */}
               <div className="py-4 text-[14px] font-heebo">
-                <h1 className="text-[14px] font-semibold mb-2">Keep this in mind about your selection:</h1>
+                <h1 className="text-[14px] font-Heebo-16 mb-2">Important to Know About Your Delivery:</h1>
                 <ul className="list-disc pl-4">
-                  <li className="mb-2">The carrier may require a signature upon delivery.</li>
-                  <li className="">
-                    In-Transit Options: Once your order has been shipped, you can use your tracking link to redirect your shipment to a pickup point, hold it at a secure location, or fill out a signature waiver or shipment release.
-                  </li>
+                  <li className="mb-2 font-Heebo-reg-14"><span className='font-Heebo-14'>Signature Required: </span>The carrier may require a signature upon delivery.</li>
+                  <li className="w-[291px] font-Heebo-reg-14"> <span className='font-Heebo-14'>Flexible Delivery Options: </span>
+                    Once your order is shipped, you'll be able to track it and adjust the delivery. You can redirect it to a pickup location, hold it at a secure site, or complete a signature waiver for a contactless delivery.
+              </li>
                 </ul>
               </div>
             </div>
 
             <button
-              className="w-full text-left pb-5 font-semibold font-heebo text-[20px] text-[#424242] md:mt-0 mt-10"
+              className="w-full text-left pb-5 font-Heebo-20 text-[#424242] md:mt-0 mt-10"
             >
               Want to check out faster? {isExpressCheckoutVisible ? '' : ''}
             </button>
@@ -305,13 +305,13 @@ export function Checkout() {
                 </div>
                 <div className="flex items-center justify-between mt-5">
                   <div className="flex-1 border-t border-gray-300"></div>
-                  <h1 className="mx-2 text-gray-500 text-sm">OR</h1>
+                  <h1 className="mx-2 font-Heebo-16 text-[#424242]">OR</h1>
                   <div className="flex-1 border-t border-gray-300"></div>
                 </div>
               </>
             )}
 
-            <h2 className="text-[20px] font-semibold font-heebo mb-5 text-[#424242] mt-[40px] leading-[20px]">Where should we send your order?</h2>
+            <h2 className="font-Heebo-20 mb-5 text-[#424242] mt-[40px]">Where should we send your order?</h2>
             <form onSubmit={handleSubmit} className='space-y-[20px]'>
               <div className="flex md:gap-[18px] gap-[5px] md:h-[56px] max-w-[511px] flex-col sm:flex-row">
                 <div className="mb-4 w-full sm:w-1/2">
@@ -436,7 +436,7 @@ export function Checkout() {
                   />
                 </div>
               )}
-              <h2 className="text-[20px] font-semibold font-heebo text-[#424242] mt-5 leading-[20px]">How can we reach you?</h2>
+              <h2 className="font-Heebo-20 text-[#424242] mt-5">How can we reach you?</h2>
               <div className="mb-5 max-w-[511px] w-full">
                 <input
                   type="email"
@@ -469,7 +469,7 @@ export function Checkout() {
               </div>
               <button
                 type="submit"
-                className={`bg-[#9E9EA0] text-white py-2 h-[56px] rounded-[10px] w-full ${isFormValid ? 'hover:bg-gray-800 text-white' : 'opacity-50 cursor-not-allowed text-white'}`}
+                className={`bg-[#9E9EA0] py-2 h-[56px] rounded-[10px] w-full font-Heebo-16 text-white ${isFormValid ? 'hover:bg-gray-800 text-white' : 'opacity-50 cursor-not-allowed text-white'}`}
                 disabled={!isFormValid}
               >
                 Continue to Payment
@@ -481,11 +481,11 @@ export function Checkout() {
         <div className="w-full lg:w-1/3 md:p-4 md:block hidden">
           {/* <CheckoutCart /> */}
           <div className="p-4 text-[14px] font-heebo leading-[14px]">
-            <h1 className="text-[14px] font-semibold mb-2 text-[#1E1E1E]">Keep this in mind about your selection:</h1>
+            <h1 className="font-Heebo-16 mb-2 text-[#1E1E1E]">Important to Know About Your Delivery:</h1>
             <ul className="list-disc pl-4 text-[#6F6F6F]">
-              <li className="mb-2">The carrier may require a signature upon delivery.</li>
-              <li className="w-[291px]">
-                In-Transit Options: Once your order has been shipped, you can use your tracking link to redirect your shipment to a pickup point, hold it at a secure location, or fill out a signature waiver or shipment release.
+              <li className="mb-2 font-Heebo-reg-14"><span className='font-Heebo-14'>Signature Required: </span>The carrier may require a signature upon delivery.</li>
+              <li className="w-[291px] font-Heebo-reg-14"> <span className='font-Heebo-14'>Flexible Delivery Options: </span>
+                Once your order is shipped, you'll be able to track it and adjust the delivery. You can redirect it to a pickup location, hold it at a secure site, or complete a signature waiver for a contactless delivery.
               </li>
             </ul>
           </div>
