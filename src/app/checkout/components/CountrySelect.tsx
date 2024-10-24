@@ -21,7 +21,7 @@ export function CountrySelect({ selectedCountry, onCountryChange }: CountrySelec
         name="country"
         value={selectedCountry}
         onChange={handleChange}
-        className="mt-1 block w-full h-[56px] px-4 py-2 rounded-md text-[14px] font-heebo bg-transparent "
+        className="block w-full h-[56px] px-4 py-2 rounded-md text-[14px] font-heebo bg-transparent "
         required
       >
         {countries.map((country) => (

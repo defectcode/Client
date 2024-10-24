@@ -84,11 +84,27 @@
   color: #1E1E1E;
 }
 
+.font-Heebo-18 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #1E1E1E;
+}
+
 .font-Heebo-16 {
   font-family: 'Heebo', sans-serif;
   font-size: 16px;
   font-weight: 600;
   line-height: 16px;
+  color: #1E1E1E;
+}
+
+.font-Heebo-17 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 17px;
   color: #1E1E1E;
 }
 
@@ -104,8 +120,15 @@
   font-family: 'Heebo', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 14px;
+  line-height: 18px;
   color: #1E1E1E;
+}
+
+.font-Heebo-reg-16 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
 }
 
 .font-Heebo-med-16 {
@@ -116,11 +139,32 @@
   color: #1E1E1E;
 }
 
+.font-Heebo-med--16 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
 
 .font-Heebo-med-15 {
   font-family: 'Heebo', sans-serif;
   font-size: 15px;
   font-weight: 500;
+  line-height: 15px;
+}
+
+.font-Heebo-bold-15 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 19px;
+}
+
+.font-Heebo-reg-15 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
   line-height: 15px;
 }
 
@@ -134,4 +178,66 @@
   font-family: 'Heebo', sans-serif;
   font-weight: 400;
   line-height: 14px;
+}
+
+.font-Heebo-med-13 {
+  font-family: 'Heebo', sans-serif;
+  font-weight: 500;
+  line-height: 13px;
+}
+
+
+
+
+.font-Heebo-reg-12 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+
+.font-Heebo-bold-12 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 16px;
+}
+
+.shadow-container {
+  position: relative;
+  background-color: #F9F9F9;
+  max-height: calc(100vh - 112px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-top: 30px; /* Adaugă padding pentru a separa conținutul */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Gradient pentru partea de sus și de jos */
+.shadow-top,
+.shadow-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.shadow-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+}
+
+.shadow-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
 }

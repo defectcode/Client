@@ -64,7 +64,7 @@ export function CheckoutCartHeader() {
         {/* Overlay negru semi-transparent */}
         {isSummaryVisible && (
           <div
-            className="fixed inset-0 bg-[#1E1E1E] max-h-[80vh] bg-opacity-90 z-40 md:hidden mt-44"
+            className="fixed inset-0 bg-[#000000] bg-opacity-60 max-h-[80vh] z-40 md:hidden mt-44"
             onClick={handleToggleSummary}
           ></div>
         )}
@@ -72,7 +72,7 @@ export function CheckoutCartHeader() {
         {/* Popup-ul animat care coboară din buton */}
         <div
           className={`absolute left-0 right-0 transform transition-all duration-0 ease-in-out bg-white shadow-lg z-50 mt-2 ${
-            isSummaryVisible ? 'max-h-[80vh] opacity-100 translate-y-0 rounded-t-lg' : 'max-h-0 opacity-0 -translate-y-5'
+            isSummaryVisible ? 'max-h-[80vh] opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-5'
           }`}
           style={{
             transformOrigin: 'top',
@@ -83,21 +83,27 @@ export function CheckoutCartHeader() {
           }}
         >
           <div className="pb-5">
-            <div className="bg-[#F9F9F9] px-4 pt-4 rounded-b-[10px] overflow-y-auto max-h-[300px]">
+            <div className="p-5 relative flex-grow overflow-y-auto shadow-container">
               {items.length ? (
-                items.map((item) => (
-                  <CheckoutCartItem item={item} key={item.id} isLastItem={false} />
+                items.map((item, index) => (
+                  <CheckoutCartItem
+                    item={item}
+                    key={item.id}
+                    isLastItem={index === items.length - 1}
+                    isSingleItem={items.length === 1}
+                  />
                 ))
               ) : (
                 <div className="text-sm text-muted-foreground">The cart is empty!</div>
-              )}
-            </div>
+            )}
+          </div>
+
 
             {/* Secțiunea statică cu prețul total și alte informații */}
             <div className="px-5 pt-5 bg-white rounded-[10px] text-">
-              <div className="flex items-center justify-between text-[#111111] font-Heebo-16 text-[16px] mb-5">
-                <p>{`${totalItemsCount} ${itemText}`}</p>
-                <a href="/bag" className="text-[#5D5D5D] font-Heebo-med-16 underline">Edit Bag</a>
+              <div className="flex items-center justify-between font-Heebo-16 text-[16px] mb-5">
+                <p className='text-[#111111]'>{`${totalItemsCount} ${itemText}`}</p>
+                <a href="/bag" className=" font-Heebo-med--16 underline text-[#5D5D5D]">Edit Bag</a>
               </div>
               <div className='border-t border-b border-[#E8E8ED] py-5 font-Heebo-med-16 text-[#111111]'>
                 <div className="font-medium flex items-center justify-between">
@@ -114,7 +120,7 @@ export function CheckoutCartHeader() {
                 </div>
               </div>
               <div className="font-Heebo-16 text-[#111111] mt-5 flex items-center justify-between">
-                <p>Total:</p>
+                <p>Total</p>
                 {formatPrice(finalTotal)}
               </div>
             </div>
@@ -142,70 +148,77 @@ export function CheckoutCartHeader() {
           {isSummaryVisible && (
             <>
               <div
-                className="fixed inset-0 bg-[#1E1E1E] bg-opacity-90 z-40"
+                className="fixed inset-0 bg-[#000000] bg-opacity-60 z-40"
                 onClick={handleToggleSummary}
               ></div>
 
               {/* Drawer-ul adaptat pentru desktop */}
               <div
                 className={`fixed ${window.innerWidth < 768 ? 'left-0 w-full' : 'right-0 w-[400px]'} bg-white z-50 transform transition-transform duration-300 ${
-                  isSummaryVisible ? 'top-0' : '-top-full'
+                  isSummaryVisible ? 'top-[20px]' : '-top-full'
                 }`}
                 style={{
-                  height: '100vh',
+                  bottom: '20px', // Setează distanța de jos la 20px
+                  height: 'calc(100vh - 40px)', // Înălțimea ajustată pentru a lăsa 20px sus și jos
                   boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
                   overflowY: 'auto',
                   borderTopLeftRadius: '20px', 
                   borderBottomLeftRadius: '20px', 
                 }}
               >
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center justify-between h-[56px] px-5 bg-white rounded-t-[20px]">
-                    <h2 className="text-[16px] font-Heebo-med font-semibold text-[#1E1E1E]">Hide order summary</h2>
+                <div className="flex flex-col h-full ">
+                  <div className="flex items-center justify-between h-[56px] p-5 bg-white">
+                    <h2 className="font-Heebo-17 text-[16px] text-[#1E1E1E]">Your Order Summary</h2>
                     <button
                       className="text-[16px] text-black"
                       onClick={handleToggleSummary}
                     >
-                      <Image src='/images/close.svg' alt='close' width={12} height={12}/>
+                      <Image src='/images/close.svg' alt='close' width={14} height={14}/>
                     </button>
                   </div>
+                  <div className="shadow-container">
+                    <div className="shadow-top"></div> {/* Gradientul de sus */}
+                    
+                    <div className="scroll-content no-scrollbar custom-scrollbar">
+                      {items.length ? (
+                        items.map((item, index) => (
+                          <CheckoutCartItem
+                            item={item}
+                            key={item.id}
+                            isLastItem={index === items.length - 1}
+                            isSingleItem={items.length === 1}
+                          />
+                        ))
+                      ) : (
+                        <div className="text-sm text-muted-foreground">The cart is empty!</div>
+                      )}
+                    </div>
 
-                  {/* Secțiunea de produse */}
-                  <div
-                    className="bg-[#F9F9F9] p-5 overflow-y-auto flex-grow custom-scrollbar"
-                    style={{ maxHeight: 'calc(100vh - 112px)' }}
-                  >
-                    {items.length ? (
-                      items.map((item) => (
-                        <CheckoutCartItem item={item} key={item.id} isLastItem={false} />
-                      ))
-                    ) : (
-                      <div className="text-sm text-muted-foreground">The cart is empty!</div>
-                    )}
+                    <div className="shadow-bottom"></div> {/* Gradientul de jos */}
                   </div>
 
                   {/* Secțiunea statică cu prețul total și alte informații */}
                   <div className="px-5 pt-5 bg-white">
-                    <div className="flex items-center justify-between text-[#111111] font-Heebo-16 text-[16px] mb-[10px]">
+                    <div className="flex items-center justify-between text-[#111111] font-Heebo-16 text-[16px] mb-5">
                       <p>{`${totalItemsCount} ${itemText}`}</p>
-                      <a href="/bag" className="text-[#5D5D5D] underline font-Heebo-med-16">Edit Bag</a>
+                      <a href="/bag" className="underline font-Heebo-med--16 text-[#5D5D5D]">Edit Bag</a>
                     </div>
-                    <div className='border-t border-b border-[#E8E8ED] py-5 font-Heebo-med-16 text-[#111111]'>
+                    <div className='border-t border-b border-[#E8E8ED] py-5 text-[#111111]'>
                       <div className="font-medium flex items-center justify-between">
-                        <p>Subtotal:</p>
-                        <span className='text-[#5D5D5D]'>{formatPrice(total)}</span>
+                        <p className='font-Heebo-reg-16'>Subtotal:</p>
+                        <span className='font-Heebo-reg-16 text-[#5D5D5D]'>{formatPrice(total)}</span>
                       </div>
                       <div className="font-medium mt-[10px] flex items-center justify-between">
-                        <p>Shipping:</p>
-                        <span className='text-[#5D5D5D]'>FREE</span>
+                        <p className='font-Heebo-reg-16'>Shipping:</p>
+                        <span className='font-Heebo-reg-16 text-[#5D5D5D]'>FREE</span>
                       </div>
                       <div className="font-medium mt-[10px] flex items-center justify-between">
-                        <p>Estimated Tax:</p>
-                        <span className='text-[#5D5D5D]'>{formatPrice(estimatedTax)}</span>
+                        <p className='font-Heebo-reg-16'>Estimated Tax:</p>
+                        <span className='font-Heebo-reg-16 text-[#5D5D5D]'>{formatPrice(estimatedTax)}</span>
                       </div>
                     </div>
                     <div className="font-Heebo-16 text-[#111111] my-5 flex items-center justify-between">
-                      <p className='font-Heebo-16'>Total:</p>
+                      <p className='font-Heebo-16'>Total</p>
                       <p className='font-Heebo-16'>{formatPrice(finalTotal)}</p>
                     </div>
                   </div>

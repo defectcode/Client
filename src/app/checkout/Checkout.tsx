@@ -13,6 +13,7 @@ import CheckoutPage from '@/components/layouts/main-layout/header/header-menu/he
 import PayPalButton from '@/components/layouts/main-layout/header/header-menu/header-cart/cart-item/PayPalButton';
 import { InfoHeader } from '@/components/layouts/main-layout/header/InfoHeader';
 import { CheckoutCartHeader } from '@/components/layouts/main-layout/header/header-menu/header-cart/CheckoutCartHeader';
+import { clsx } from 'clsx';
 
 interface ShippingData {
   company: string;
@@ -57,6 +58,10 @@ export function Checkout() {
   const [isSubmitted, setIsSubmitted] = useState(false); // Stare pentru a gestiona trimiterea formularului
   const [isEditing, setIsEditing] = useState(false); // Stare pentru a gestiona editarea datelor
   const [isExpressCheckoutVisible, setExpressCheckoutVisible] = useState(true); // Gestionarea vizibilității secțiunii Express Checkout
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isPaymentVisible, setIsPaymentVisible] = useState(false);
+
+
 
   const [showCompanyInput, setShowCompanyInput] = useState(false);
 
@@ -151,47 +156,55 @@ export function Checkout() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
+    // Verifică dacă formularul este valid
     if (!isFormValid) return;
-  
-    // Preluăm lista de produse din `items`
+
+    // Extrage produsele din coș
     const products = items.map((item) => ({
-      name: item.product,
-      quantity: item.quantity,
-      price: item.price,
+        name: item.product,
+        quantity: item.quantity,
+        price: item.price,
     }));
-  
+
+    // Construiește datele pentru email
     const emailData = {
-      email: shippingData.email,
-      firstName: shippingData.firstName,
-      lastName: shippingData.lastName,
-      products, // Adăugăm produsele la payload
+        email: shippingData.email,
+        firstName: shippingData.firstName,
+        lastName: shippingData.lastName,
+        products, // Adaugă produsele la payload
     };
-  
+
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(emailData),
-      });
-  
-      const data = await response.json();
-  
-      if (!response.ok) {
-        console.error('Failed to send email:', data);
-        return;
-      }
-  
-      console.log('Email sent successfully:', data);
+        // Trimite datele către backend pentru a procesa emailul
+        const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailData),
+        });
+
+        const data = await response.json();
+
+        // Verifică dacă răspunsul este corect
+        if (!response.ok) {
+            console.error('Failed to send email:', data);
+            return;
+        }
+
+        console.log('Email sent successfully:', data);
     } catch (error) {
-      console.error('Error while sending email:', error);
+        console.error('Error while sending email:', error);
+        return; // Oprește execuția dacă există o eroare
     }
-  
+
+    // Setează stările pentru a indica faptul că formularul a fost trimis și că secțiunea de plată trebuie afișată
     setIsSubmitted(true);
     setIsEditing(false);
-  };
+    setIsPaymentVisible(true); // Setează starea pentru a afișa secțiunea de plată
+};
+
   
   
   
@@ -238,10 +251,13 @@ export function Checkout() {
                 <p>{shippingData.phone}</p>
               </div>
             </div>
-            <Order items={items}/>
+            {isPaymentVisible && (
+              <Order items={items}/>
+            )}
+            {/* <Order items={items}/> */}
           </div>
           <div className="w-full lg:w-1/3">
-            <CheckoutCart />
+            {/* <CheckoutCart /> */}
           </div>
         </div>
       </div>
@@ -259,15 +275,15 @@ export function Checkout() {
           <div className="w-full max-w-[511px]">
             <div className="mb-4">
               <h2 className="font-Heebo-20 mb-4 text-[#424242]">When will your order arrive?</h2>
-              <div className="flex items-center justify-between border p-5 rounded-[10px] mb-10 h-[56px]">
+              <div className="flex items-center justify-between border border-[#1E1E1E] p-5 rounded-[10px] md:mb-10 mb-5 h-[56px]">
                 <h3 className="text-[#1E1E1E] font-Heebo-16 ">Arrives Wed, Oct 22 - Oct 29</h3>
                 <p className="text-[#8C8C8C] font-heebo font-medium text-[14px] leading-[14px]">FREE</p>
               </div>
             </div>
 
-            <div className="w-full lg:w-1/3 md:p-4 md:hidden block border-y">
+            <div className="w-full lg:w-1/3 md:p-4 md:hidden block border-b">
               {/* <CheckoutCart /> */}
-              <div className="py-4 text-[14px] font-heebo">
+              <div className="py-5 text-[14px] font-heebo">
                 <h1 className="text-[14px] font-Heebo-16 mb-2">Important to Know About Your Delivery:</h1>
                 <ul className="list-disc pl-4">
                   <li className="mb-2 font-Heebo-reg-14"><span className='font-Heebo-14'>Signature Required: </span>The carrier may require a signature upon delivery.</li>
@@ -278,6 +294,7 @@ export function Checkout() {
               </div>
             </div>
 
+            {/* //Input Date */}
             <button
               className="w-full text-left pb-5 font-Heebo-20 text-[#424242] md:mt-0 mt-10"
             >
@@ -286,24 +303,24 @@ export function Checkout() {
             {isExpressCheckoutVisible && (
              <>
                 <div className="flex flex-col gap-4 mb-6">
-                  <button className="w-full py-2 border rounded-[10px] bg-[#000000] flex items-center justify-center md:h-[56px] h-10 md:hidden block">
+                  {/* <button className="w-full py-2 border rounded-[10px] bg-[#000000] flex items-center justify-center md:h-[56px] h-10 md:hidden block">
                       <Image src='/images/google.svg' alt='googlepay' width={48} height={13} />
-                    </button>
+                    </button> */}
                   <div className="flex gap-5 md:h-[56px] h-10">
                     <button className="w-full py-2 border rounded-[10px] bg-[#00457C] flex items-center justify-center">
-                      <Image src='/images/paypal.svg' alt='PayPal' width={48} height={13} />
+                      <Image src='/images/paypal.svg' alt='PayPal' width={69} height={18} className='md:w-[69px] md:h-[18px] w-[48px] h-[13px]' />
                     </button>
                     <button className="w-full py-2 border rounded-[10px] bg-[#000000] flex items-center justify-center">
-                      <Image src='/images/applepay.svg' alt='Apple Pay' width={42} height={16} />
+                      <Image src='/images/applepay.svg' alt='Apple Pay' width={54} height={20} className='md:w-[54px] md:h-[20px] w-[42px] h-[16px]'/>
                       <CheckoutPage/>
                     </button>
                     <button className="w-full py-2 border rounded-[10px] bg-[#333E48] flex items-center justify-center">
-                      <Image src='/images/amazonpay.svg' alt='Amazon Pay' width={81} height={15} className='mt-1' />
+                      <Image src='/images/amazonpay.svg' alt='Amazon Pay' width={102} height={20} className='mt-1 md:w-[102px] md:h-[20px] w-[81px] h-[15px]' />
                       <CheckoutPage/>
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center justify-between mt-5">
+                <div className="flex items-center justify-between md:mt-5 mt-10">
                   <div className="flex-1 border-t border-gray-300"></div>
                   <h1 className="mx-2 font-Heebo-16 text-[#424242]">OR</h1>
                   <div className="flex-1 border-t border-gray-300"></div>
@@ -312,16 +329,16 @@ export function Checkout() {
             )}
 
             <h2 className="font-Heebo-20 mb-5 text-[#424242] mt-[40px]">Where should we send your order?</h2>
-            <form onSubmit={handleSubmit} className='space-y-[20px]'>
-              <div className="flex md:gap-[18px] gap-[5px] md:h-[56px] max-w-[511px] flex-col sm:flex-row">
-                <div className="mb-4 w-full sm:w-1/2">
+            <form onSubmit={handleSubmit} className='md:space-y-5 space-y-[10px]'>
+              <div className="flex md:gap-5 gap-[10px] md:h-[56px] max-w-[511px] md:flex-row flex-col">
+                <div className="w-full sm:w-1/2">
                   <input
                     type="text"
                     id="firstName"
                     name="firstName"
                     value={shippingData.firstName}
                     onChange={handleChange}
-                    className={`mt-1 block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.firstName)}`}
+                    className={`block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.firstName)}`}
                     placeholder="First Name"
                     required
                   />
@@ -329,14 +346,14 @@ export function Checkout() {
                     <span className="text-red-500 text-sm">Please enter a valid First Name</span>
                   )}
                 </div>
-                <div className="mb-4 w-full sm:w-1/2">
+                <div className="w-full sm:w-1/2">
                   <input
                     type="text"
                     id="lastName"
                     name="lastName"
                     value={shippingData.lastName}
                     onChange={handleChange}
-                    className={`mt-1 block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.lastName)}`}
+                    className={`block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.lastName)}`}
                     placeholder="Last Name"
                     required
                   />
@@ -345,7 +362,7 @@ export function Checkout() {
                   )}
                 </div>
               </div>
-              <div className="mb-4 max-w-[511px] w-full">
+              <div className="mb-5 max-w-[511px] w-full">
                 <input
                   type="text"
                   id="address"
@@ -360,15 +377,15 @@ export function Checkout() {
                   <span className="text-red-500 text-sm">Please enter a valid address</span>
                 )}
               </div>
-              <div className="flex gap-[14px] md:h-[56px] max-w-[511px] flex-col sm:flex-row">
-                <div className="mb-4 w-full sm:w-1/2">
+              <div className="flex md:gap-[14px] gap-[10px] md:h-[56px] max-w-[511px] flex-col sm:flex-row">
+                <div className="md:mb-4 w-full sm:w-1/2 h-[56px]">
                   <input
                     type="text"
                     id="city"
                     name="city"
                     value={shippingData.city}
                     onChange={handleChange}
-                    className={`mt-1 block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.city)}`}
+                    className={`block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.city)}`}
                     placeholder="City/Town"
                     required
                   />
@@ -376,21 +393,21 @@ export function Checkout() {
                     <span className="text-red-500 text-sm">Please enter a valid City</span>
                   )}
                 </div>
-                <div className={`sm:w-1/2 mt-1 w-full h-[56px] flex items-center py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.country)}`}
+                <div className={`sm:w-1/2 w-full h-[56px] flex items-center py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.country)}`}
                 >
                   <CountrySelect
                     selectedCountry={shippingData.country}
                     onCountryChange={handleCountryChange}
                   />
                 </div>
-                <div className="md:mb-4 w-full sm:w-1/2">
+                <div className="md:mb-4 w-full sm:w-1/2 h-[56px]">
                   <input
                     type="text"
                     id="zip"
                     name="zip"
                     value={shippingData.zip}
                     onChange={handleChange}
-                    className={`mt-1 block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.zip)}`}
+                    className={`block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.zip)}`}
                     placeholder="Zip code"
                     required
                   />
@@ -399,44 +416,78 @@ export function Checkout() {
                   )}
                 </div>
               </div>
+
               <div className="flex items-center cursor-pointer text-[#6F6F6F] text-[14px] font-heebo md:block hidden mt-0" onClick={handleToggleCompanyInput}>
-                <span className="mr-2">{showCompanyInput ? '-' : '+'}</span>
-                <span>Add Company, C/O, Apt, Suite, Unit</span>
+                {!showCompanyInput && (
+                  <div className='flex items-center relative'>
+                    <span className="mr-2">+</span>
+                    <span>Add Company Name</span>
+                    <span
+                      className="ml-2 cursor-pointer relative"
+                      onMouseEnter={() => setShowTooltip(true)}
+                      onMouseLeave={() => setShowTooltip(false)}
+                    >
+                      <Image src="/images/question-icon.svg" alt="info" width={18} height={18} className='' />
+                      {showTooltip && (
+                        <div className="absolute bg-gray-100 text-gray-700 text-sm p-3 rounded-[10px] shadow-lg w-[250px] -left-1/2 transform -translate-x-1/2 bottom-full mb-2 z-50">
+                          The sales tax listed on the checkout page is only an estimate. Your invoice will contain the final sales tax, including state and local taxes, as well as any applicable rebates or fees.
+                        </div>
+                      )}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {showCompanyInput && (
-                <div className="mb-4 max-w-[511px] w-full md:block hidden">
+                <div className="mb-5 max-w-[511px] w-full md:block hidden">
                   <input
                     type="text"
                     id="company"
                     name="company"
                     value={shippingData.company || ''}
                     onChange={handleChange}
-                    className={`mt-1 block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.company)}`}
-                    placeholder="Company name"
+                    className={`block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.company)}`}
+                    placeholder="Company Name (optional)"
                   />
                 </div>
               )}
 
               <div className="flex items-center cursor-pointer text-[#6F6F6F] text-[14px] font-heebo md:hidden block" onClick={handleToggleCompanyInput}>
-                <span className="mr-2">{showCompanyInput ? '-' : '+'}</span>
-                <span>Add Company, C/O, Apt, Suite, Unit</span>
+                {!showCompanyInput && (
+                  <div className='flex items-center relative'>
+                    <span className="mr-2">+</span>
+                    <span>Add Company Name</span>
+                    <span
+                      className="ml-2 cursor-pointer relative"
+                      onMouseEnter={() => setShowTooltip(true)}
+                      onMouseLeave={() => setShowTooltip(false)}
+                    >
+                      <Image src="/images/question-icon.svg" alt="info" width={18} height={18} className='' />
+                      {showTooltip && (
+                        <div className="absolute bg-gray-100 text-gray-700 text-sm p-3 rounded-[10px] shadow-lg w-[250px] -left-1/2 transform -translate-x-1/2 bottom-full mb-2 z-50">
+                          The sales tax listed on the checkout page is only an estimate. Your invoice will contain the final sales tax, including state and local taxes, as well as any applicable rebates or fees.
+                        </div>
+                      )}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {showCompanyInput && (
-                <div className="mb-4 max-w-[511px] w-full md:hidden block">
+                <div className=" mb-max-w-[511px] w-full md:hidden block">
                   <input
                     type="text"
                     id="company"
                     name="company"
                     value={shippingData.company || ''}
                     onChange={handleChange}
-                    className={`mt-1 block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.company)}`}
-                    placeholder="Company name"
+                    className={`block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.company)}`}
+                    placeholder="Company Name (optional)"
                   />
                 </div>
               )}
-              <h2 className="font-Heebo-20 text-[#424242] mt-5">How can we reach you?</h2>
+
+              <h2 className="font-Heebo-18 text-[#424242] md:pt-5 pt-[30px]">How can we reach you?</h2>
               <div className="mb-5 max-w-[511px] w-full">
                 <input
                   type="email"
@@ -448,6 +499,9 @@ export function Checkout() {
                   placeholder="Email"
                   required
                 />
+                <div className='md:hidden block font-Heebo-reg-14 mt-[10px]'>
+                  We’ll send your receipt and updates by email.
+                </div>
                 {errors.email && (
                   <span className="text-red-500 text-sm">Please enter a valid Email</span>
                 )}
@@ -459,23 +513,27 @@ export function Checkout() {
                   name="phone"
                   value={shippingData.phone}
                   onChange={handleChange}
-                  className={`mt-1 block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.phone)}`}
+                  className={`block w-full h-[56px] px-4 py-2 rounded-[10px] text-[14px] font-heebo placeholder-gray-400 ${getInputStyles(errors.phone)}`}
                   placeholder="Phone"
                   required
                 />
+                <div className='md:hidden block font-Heebo-reg-14 mt-[10px] md:mb-0 mb-1'>
+                  Make sure your phone number is correct. It can’t be changed.
+                </div>
                 {errors.phone && (
                   <span className="text-red-500 text-sm">Please enter a valid Phone Number</span>
                 )}
               </div>
               <button
                 type="submit"
-                className={`bg-[#9E9EA0] py-2 h-[56px] rounded-[10px] w-full font-Heebo-16 text-white ${isFormValid ? 'hover:bg-gray-800 text-white' : 'opacity-50 cursor-not-allowed text-white'}`}
+                className={`bg-[#E5E5E5] py-2 h-[56px] rounded-[10px] w-full font-Heebo-16 text-white ${isFormValid ? 'hover:bg-[#9E9EA0] text-white' : 'opacity-50 cursor-not-allowed text-white'}`}
                 disabled={!isFormValid}
               >
                 Continue to Payment
               </button>
             </form>
           </div>
+
           <Order items={items} />
         </div>
         <div className="w-full lg:w-1/3 md:p-4 md:block hidden">
@@ -483,8 +541,8 @@ export function Checkout() {
           <div className="p-4 text-[14px] font-heebo leading-[14px]">
             <h1 className="font-Heebo-16 mb-2 text-[#1E1E1E]">Important to Know About Your Delivery:</h1>
             <ul className="list-disc pl-4 text-[#6F6F6F]">
-              <li className="mb-2 font-Heebo-reg-14"><span className='font-Heebo-14'>Signature Required: </span>The carrier may require a signature upon delivery.</li>
-              <li className="w-[291px] font-Heebo-reg-14"> <span className='font-Heebo-14'>Flexible Delivery Options: </span>
+              <li className="mb-2 font-Heebo-reg-14"><span className='font-Heebo-14 text-[#1E1E1E]'>Signature Required: </span>The carrier may require a signature upon delivery.</li>
+              <li className="w-[291px] font-Heebo-reg-14"> <span className='font-Heebo-14 text-[#1E1E1E]'>Flexible Delivery Options: </span>
                 Once your order is shipped, you'll be able to track it and adjust the delivery. You can redirect it to a pickup location, hold it at a secure site, or complete a signature waiver for a contactless delivery.
               </li>
             </ul>

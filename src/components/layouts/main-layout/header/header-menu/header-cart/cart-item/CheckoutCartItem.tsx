@@ -12,9 +12,10 @@ import './PayPal.css'
 interface CartItemProps {
   item: ICartItem;
   isLastItem: boolean;
+  isSingleItem: boolean;
 }
 
-export function CheckoutCartItem({ item, isLastItem }: CartItemProps) {
+export function CheckoutCartItem({ item, isLastItem, isSingleItem }: CartItemProps) {
   const dispatch = useDispatch();
 
   const handleRemoveItem = () => {
@@ -31,13 +32,13 @@ export function CheckoutCartItem({ item, isLastItem }: CartItemProps) {
               alt={item.product.title}
               width={92}
               height={92}
-              className="object-cover w-[92px] h-[92px]"
+              className="object-cover w-[90px] h-[90px]"
             />
           </Link>
 
           {/* Cantitatea produsului afișată în colțul din dreapta sus */}
           <span
-            className="absolute bg-[#8C8C8C]/50 text-white text-xs font-bold font-heebo rounded-full flex items-center justify-center w-5 h-5"
+            className="absolute bg-[#5D5D5D]/50 text-white text-xs font-bold font-heebo rounded-full flex items-center justify-center w-5 h-5"
             style={{
               top: '-10px',
               right: '-10px',
@@ -51,20 +52,20 @@ export function CheckoutCartItem({ item, isLastItem }: CartItemProps) {
         </div>
 
         {/* Detalii despre produs */}
-        <div className="ml-[10px] flex flex-col max-w-[200px] w-full space-y-5">
+        <div className="ml-[10px] flex flex-col max-w-[250px] w-full space-y-5">
           <h2 className="font-Heebo-med-15 truncate max-w-full w-full text-[#1E1E1E]">
             {item.product.title}
           </h2>
           <div className="flex flex-col items-start justify-center space-y-5 font-Heebo-med text-[#8C8C8C] text-sm">
-            <p className='font-Heebo-reg text-[13px]'>{item.product.color.name}</p>
-            <p className='font-Heebo-reg text-[13px]'>{formatPrice(item.product.price)}</p>
+            <p className='font-Heebo-reg text-[14px]'>{item.product.color.name}</p>
+            <p className='font-Heebo-med-13 text-[14px] text-[#5D5D5D]'>{formatPrice(item.product.price)}</p>
           </div>
         </div>
       </div>
 
       {/* Linia de separare între produse */}
-      {!isLastItem && (
-        <div className=" border-t border-[#E8E8ED] my-5 md:max-w-[249px] max-w-[282px] w-full" style={{ marginLeft: '110px' }}></div>
+      {!isLastItem && !isSingleItem && (
+        <div className="border-t border-[#E8E8ED] mt-[6px] mb-5 md:max-w-[249px] max-w-[282px] w-full" style={{ marginLeft: '110px' }}></div>
       )}
     </div>
   );
