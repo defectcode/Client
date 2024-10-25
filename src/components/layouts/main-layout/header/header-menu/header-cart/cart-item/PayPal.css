@@ -76,10 +76,28 @@
   color: #1E1E1E;
 }
 
+
+.font-Heebo-24-- {
+  font-family: 'Heebo', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+
+
 .font-Heebo-20 {
   font-family: 'Heebo', sans-serif;
   font-size: 20px;
   font-weight: 600;
+  line-height: 20px;
+  color: #1E1E1E;
+}
+
+.font-Heebo-bold-20 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
   line-height: 20px;
   color: #1E1E1E;
 }
@@ -97,7 +115,14 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 16px;
-  color: #1E1E1E;
+  /* color: #1E1E1E; */
+}
+
+.font-Heebo-bold-16 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
 }
 
 .font-Heebo-17 {
@@ -116,6 +141,15 @@
   color: #1E1E1E;
 }
 
+
+.font-Heebo-14-bolt {
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 14px;
+  color: #1E1E1E;
+}
+
 .font-Heebo-reg-14 {
   font-family: 'Heebo', sans-serif;
   font-size: 14px;
@@ -129,6 +163,12 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;
+}
+
+.font-Heebo-reg-16-0 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .font-Heebo-med-16 {
@@ -203,6 +243,24 @@
   font-weight: 800;
   line-height: 16px;
 }
+
+
+.font-Heebo-semibold-12 {
+  font-family: 'Heebo', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .shadow-container {
   position: relative;

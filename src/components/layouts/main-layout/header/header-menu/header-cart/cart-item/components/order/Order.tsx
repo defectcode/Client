@@ -141,7 +141,7 @@ export default function Order({ items }: PaymentProps) {
                 className={`max-w-[372px] w-full p-4 border h-[56px] rounded-[10px] ${expiryError ? 'border-red-500' : 'border-gray-300'}`}
                 placeholder="MM / YY"
               />
-              <div className="relative w-1/2 flex items-center gap-[10px]">
+              <div className="relative w-1/2 flex justify-around items-center gap-[10px]">
                 <input
                   type="text"
                   value={cvv}
@@ -157,8 +157,12 @@ export default function Order({ items }: PaymentProps) {
                   <Image src="/images/question-icon.svg" alt="info" width={18} height={18} className='' />
                 </span>
                 {showTooltip && (
-                  <div className="absolute bg-gray-100 text-gray-700 text-sm p-3 rounded-[10px] shadow-lg w-[250px] bottom-full mb-2">
-                    The sales tax listed on the checkout page is only an estimate. Your invoice will contain the final sales tax, including state and local taxes, as well as any applicable rebates or fees.
+                  
+                  <div className="absolute bg-[#E8E8ED] text-[#1D1D1F] text-sm p-5 rounded-[10px] shadow-lg w-[250px] bottom-full mb-2">
+                    <Image src='/images/card.svg' alt='card' width={88} height={60}></Image>
+                    <h1 className='font-Heebo-semibold-12 mt-[10px] mb-5'>How to find the CVV</h1>
+                    <div className='font-Heebo-reg-12'>
+                      Visa, Mastercard, Discover, and UnionPay display the three-digit CVV number on the back of the card, to the right of the signature.                    </div>
                   </div>
                 )}
               </div>
