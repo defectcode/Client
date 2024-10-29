@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
 
-interface FooterProps {}
-
-const FooterCheckout: React.FC<FooterProps> = () => {
+const FooterCheckout = () => {
   const [country, setCountry] = useState('United States');
 
   const footerLinks = [
@@ -17,32 +14,80 @@ const FooterCheckout: React.FC<FooterProps> = () => {
   ];
 
   return (
-    <footer className="md:h-[500px] h-[300px] bg-gray-50 text-gray-500 text-sm py-6 border-t border-gray-200">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-        <div className="flex flex-col md:flex-row items-center gap-4">
-          <p className="text-center md:text-left">&copy; 2024 vellov. All Rights Reserved. <Link legacyBehavior href="/privacy-policy"><a className="hover:underline">Privacy Policy</a></Link></p>
-        </div>
-        <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4 md:mt-0">
-            {footerLinks.map((link) => (
-            <Link key={link.name} href={link.href} className="hover:underline">
-                {link.name}
-            </Link>
-            ))}
+    <footer className="bg-[#F9F9F9] text-gray-500 text-sm py-6 w-full">
+      <div className="container max-w-[1060px] mx-auto px-4 md:border-t border-[#7C788A]/20">
+        {/* Desktop layout */}
+        <div className='space-y-10 w-full mt-5 md:block hidden'>
+            <div className="flex items-center justify-center md:justify-start text-center md:text-left">
+              <p className='font-Heebo-r-14 text-[#BDBDBD]'>
+                &copy; 2024 vellov. All Rights Reserved.{' '}
+                <Link href="/privacy-policy" className="hover:underline">
+                  Privacy Policy
+                </Link>
+              </p>
+            </div>
+          
+            <div className='flex justify-between items-center w-full font-Heebo-r-14'>
+              {/* Footer Links */}
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-center text-[#BDBDBD]">
+                {footerLinks.map((link) => (
+                  <Link key={link.name} href={link.href} className="hover:underline">
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
 
-        </div>
-        <div className="flex items-center gap-2 mt-4 md:mt-0">
-          <span className="text-sm">🌐</span>
-          <select
-            className="bg-transparent border-none outline-none text-gray-500 cursor-pointer"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          >
-            <option value="United States">United States</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="Moldova">Moldova</option>
-            <option value="Romania">Romania</option>
-            {/* Adaugă alte opțiuni după preferințe */}
-          </select>
+              <div className="flex items-center justify-center md:justify-end gap-2">
+                <span className="text-sm">🌐</span>
+                <select
+                  className="bg-transparent border-none outline-none text-[#BDBDBD] cursor-pointer"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  <option value="United States">United States</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="Moldova">Moldova</option>
+                  <option value="Romania">Romania</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        {/* Mobile layout */}
+        <div className="flex flex-col items-start space-y-4 md:hidden">
+          {/* Footer Top Section */}
+          <div className="border-y border-[#7C788A]/20 py-5 w-full">
+            <p className="font-Heebo-r-14 text-[#BDBDBD]">
+              &copy; 2024 vellov. All Rights Reserved.{' '}
+              <Link href="/privacy-policy" className="hover:underline">
+                Privacy Policy
+              </Link>
+            </p>
+          </div>
+
+          {/* Footer Links */}
+          <div className="flex flex-col items-start justify-start gap-4 font-Heebo-r-14 text-[#BDBDBD] border-b border-[#7C788A]/20 pb-5 w-full">
+            {footerLinks.map((link) => (
+              <Link key={link.name} href={link.href} className="hover:underline">
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Country Selector */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm">🌐</span>
+            <select
+              className="bg-transparent border-none outline-none text-[#BDBDBD] cursor-pointer"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            >
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Moldova">Moldova</option>
+              <option value="Romania">Romania</option>
+            </select>
+          </div>
         </div>
       </div>
     </footer>

@@ -18,8 +18,8 @@ export function InfoHeader() {
   };
 
   return (
-    <div className="w-full bg-white">
-      <div className="flex md:h-[62px] h-[56px] md:bg-white bg-[#F9F9F9] justify-between items-center w-full max-w-[980px] mx-auto md:border-b">
+    <div className="w-full bg-[#F9F9F9]">
+      <div className="flex md:h-[62px] h-[56px] justify-between items-center w-full max-w-[1060px] mx-auto md:border-b">
         <div className="flex-1 hidden md:block">
           <div style={{ fontFamily: 'Heebo, sans-serif' }}>
             <h1 style={{ fontSize: '24px', fontWeight: '600', lineHeight: '24px', color: '#1E1E1E' }}>

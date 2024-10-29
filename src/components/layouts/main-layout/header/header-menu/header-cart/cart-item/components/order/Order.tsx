@@ -95,7 +95,9 @@ export default function Order({ items }: PaymentProps) {
 
   return (
     <div className="md:py-5 md:pb-0 pb-5 max-w-[511px] w-full mx-auto">
-      <h2 className="text-xl font-semibold mb-5 leading-[20px]">How would you like to pay?</h2>
+      <h2 className="font-Heebo-20 mb-5 md:block hidden">How would you like to pay?</h2>
+      <h2 className="font-Heebo-18 md:hidden mb-5">How would you like to pay?</h2>
+
 
       <div className="flex items-center justify-center md:space-x-5 space-x-[10px]">
         <button
@@ -122,15 +124,21 @@ export default function Order({ items }: PaymentProps) {
 
       {selectedPaymentMethod === 'Card' && (
         <div>
-          <h3 className="font-Heebo-reg-14 my-5">Enter your card details:</h3>
+          <h3 className="font-Heebo-reg-14 my-5 md:mt-5 mt-10">Enter your card details:</h3>
           <div className="border-gray-300 rounded-[10px] md:space-y-5 space-y-[10px] relative">
+          <div className="relative max-w-[520px] w-full">
             <input
               type="text"
               value={cardNumber}
               onChange={handleCardNumberChange}
-              className={`max-w-[520px] w-full p-4 border h-[56px] rounded-[10px] ${cardError ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full p-4 pr-16 border h-[56px] rounded-[10px] ${cardError ? 'border-red-500' : 'border-gray-300 bg-[#F9F9F9]'}`}
               placeholder="Card number"
             />
+            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+              <Image src='/images/cardGroup.svg' alt='Card logos' width={176} height={19} />
+            </div>
+          </div>
+
             {cardError && <p className="text-red-500 text-sm">{cardError}</p>}
             
             <div className="flex space-x-5 relative items-center">
@@ -138,15 +146,15 @@ export default function Order({ items }: PaymentProps) {
                 type="text"
                 value={expiryDate}
                 onChange={handleExpiryDateChange}
-                className={`max-w-[372px] w-full p-4 border h-[56px] rounded-[10px] ${expiryError ? 'border-red-500' : 'border-gray-300'}`}
+                className={`md:max-w-[400px] md:w-full max-w-[176px] w-full  p-4 border h-[56px] rounded-[10px] ${expiryError ? 'border-red-500' : 'border-gray-300 bg-[#F9F9F9]'}`}
                 placeholder="MM / YY"
               />
-              <div className="relative w-1/2 flex justify-around items-center gap-[10px]">
+              <div className="relative w-1/3 flex justify-around items-center gap-[10px]">
                 <input
                   type="text"
                   value={cvv}
                   onChange={handleCvvChange}
-                  className={`max-w-[98px] w-full p-4 border h-[56px] rounded-[10px] ${cvvError ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`md:max-w-[98px] md:w-full max-w-[176px] w-full p-4 border h-[56px] rounded-[10px] ${cvvError ? 'border-red-500' : 'border-gray-300 bg-[#F9F9F9]'}`}
                   placeholder="CVV"
                 />
                 <span
@@ -170,8 +178,10 @@ export default function Order({ items }: PaymentProps) {
             {expiryError && <p className="text-red-500 text-sm">{expiryError}</p>}
             {cvvError && <p className="text-red-500 text-sm">{cvvError}</p>}
           </div>
-          <p className='border border-[#7C788A]/20 max-w-[520px] mt-5'></p>
-          <p className='font-Heebo-reg-15 text-[#6F6F6F] mb-5 mt-10'>By clicking the "Payment" button, you confirm that you have read, understand, and accept our <span className='font-Heebo-bold-15 underline text-[#6F6F6F]'>Terms of Sale, Privacy Policy</span>, and <span className='font-Heebo-bold-15 underline text-[#6F6F6F]'>Return Policy.</span></p>
+          <p className='md:border border-[#7C788A]/20 max-w-[520px] mt-5'></p>
+          <p className='font-Heebo-reg-15 text-[#6F6F6F] mb-5 mt-10 md:block hidden'>By clicking the "Payment" button, you confirm that you have read, understand, and accept our <span className='font-Heebo-bold-15 underline text-[#6F6F6F]'>Terms of Sale, Privacy Policy</span>, and <span className='font-Heebo-14-b underline text-[#6F6F6F]'>Return Policy.</span></p>
+          <p className='font-Heebo-r-14 text-[#6F6F6F] mb-5 mt-10 md:hidden'>By clicking the "Payment" button, you confirm that you have read, understand, and accept our <span className='font-Heebo-bold-15 underline text-[#6F6F6F]'>Terms of Sale, Privacy Policy</span>, and <span className='font-Heebo-14-b underline text-[#6F6F6F]'>Return Policy.</span></p>
+
         </div>
       )}
 
