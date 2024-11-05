@@ -11,9 +11,9 @@ export function Bag() {
 	if (!user) return null
 
 	return (
-		<div className='my-6'>
-			<Header />
-			<CatalogCheckout title='Featured' products={user.favorites} />
+		<div className='bg-[#F9F9F9] md:py-6'>
+			<Header/>
+			<CatalogCheckout title='' products={user.favorites} />
 		</div>
 	)
 }

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ICatalog } from './catalog.interface'
-import { ProductCardCheckout } from './product-card/ProductCardCeckout'
+import { ProductBag } from './product-card/ProductBag'
 
 export function CatalogCheckout({
 	title,
@@ -10,9 +10,9 @@ export function CatalogCheckout({
 	products
 }: ICatalog) {
 	return (
-		<div className="w-full flex justify-center">
-			<div className="max-w-[1400px] w-full">
-				<div className="md:flex md:items-center md:justify-between mb-4 md:mt-5">
+		<div className="w-full flex justify-center bg-[#F9F9F9]">
+			<div className="max-w-[1100px] w-full">
+				<div className="md:md:flex md:items-center md:justify-between md:mb-4 md:mt-5 md:mx-5">
 					<div className="max-w-2xl px-4 lg:max-w-full lg:px-0">
 						<h1 className="text-2xl font-bold">{title}</h1>
 						{description && (
@@ -30,15 +30,15 @@ export function CatalogCheckout({
 				</div>
 
 				<div className="flex items-center w-full">
-					<div className="mt-2 w-full flex flex-col gap-8">
+					<div className="md:mt-2 w-full flex flex-col gap-8">
 						{products.length ? (
 							products.map((product) => (
 								<div className="w-full h-full " key={product.id}>
-									<ProductCardCheckout product={product} />
+									<ProductBag product={product} />
 								</div>
 							))
 						) : (
-							<div>Нечего не найдено</div>
+							<div>Nothing found</div>
 						)}
 					</div>
 				</div>

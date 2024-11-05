@@ -8,6 +8,7 @@ import { useProfile } from '@/hooks/useProfile'
 import { userService } from '@/services/user.service'
 
 import { IProduct } from '@/shared/types/product.interface'
+import Image from 'next/image'
 
 interface FavoriteButtonProps {
 	product: IProduct
@@ -41,9 +42,9 @@ export function FavoriteButton({ product }: FavoriteButtonProps) {
 			disabled={isPending}
 		>
 			{isExists ? (
-				<AiFillHeart color='#8C8C8C' className='size-5' />
+				<Image src='/images/selectHeart.svg' alt='heart' height={16} width={17} color='#8C8C8C' />
 			) : (
-				<AiOutlineHeart className='size-5' />
+				<Image src='/images/heart.svg' alt='heart' height={16} width={17} color='#8C8C8C'/>
 			)}
 		</Button>
 	)
