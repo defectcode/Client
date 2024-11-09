@@ -113,9 +113,10 @@ const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
                  </div>
                  <div>
                   <div className='flex gap-[5px]'>
-                    <h2 className="font-Heebo-16 text-[#8C8C8C] truncate-2-lines cursor-pointer" onClick={() => toggleColorDropdown(item.id)}>
-                      {selectedColors[item.id] || item.product.color.name}
-                    </h2>
+                  <h2 className="font-Heebo-16 text-[#8C8C8C] truncate-2-lines cursor-pointer" onClick={() => toggleColorDropdown(String(item.id))}>
+                    {selectedColors[String(item.id)] || item.product.color.name}
+                  </h2>
+
                     <Image
                       src='/images/arr.svg'
                       alt='arr'
@@ -133,7 +134,7 @@ const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
                         <div
                           key={color}
                           className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                          onClick={() => selectColor(item.id, color)}
+                          onClick={() => selectColor(String(item.id), color)}
                         >
                           {color}
                         </div>
@@ -286,9 +287,10 @@ const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
                       </div>
                       <div>
                         <div className='flex gap-[5px]'>
-                          <h2 className="font-Heebo-16 text-[#8C8C8C] truncate-2-lines cursor-pointer" onClick={() => toggleColorDropdown(item.id)}>
-                            {selectedColors[item.id] || item.product.color.name}
-                          </h2>
+                        <h2 className="font-Heebo-16 text-[#8C8C8C] truncate-2-lines cursor-pointer" onClick={() => toggleColorDropdown(String(item.id))}>
+                          {selectedColors[String(item.id)] || item.product.color.name}
+                        </h2>
+
                           <Image
                             src='/images/arr.svg'
                             alt='arr'
@@ -306,7 +308,7 @@ const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
                               <div
                                 key={color}
                                 className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                                onClick={() => selectColor(item.id, color)}
+                                onClick={() => selectColor(String(item.id), color)}
                               >
                                 {color}
                               </div>
