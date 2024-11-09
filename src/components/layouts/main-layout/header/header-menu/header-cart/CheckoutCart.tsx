@@ -52,7 +52,7 @@ export function CheckoutCart() {
           <div className="bg-[#F9F9F9] p-4 rounded-lg overflow-y-auto flex-grow mb-4">
             {items.length ? (
               items.map((item) => (
-                <CheckoutCartItem item={item} key={item.id} />
+                <CheckoutCartItem item={item} key={item.id} isLastItem={false} isSingleItem={false} />
               ))
             ) : (
               <div className="text-sm text-muted-foreground">The cart is empty!</div>
@@ -107,7 +107,7 @@ export function CheckoutCart() {
                   {items.length ? (
                     <div className="max-h-[300px] overflow-y-scroll custom-scrollbar mb-4">
                       {items.map((item) => (
-                        <CheckoutCartItem item={item} key={item.id} />
+                        <CheckoutCartItem item={item} key={item.id} isLastItem={false} isSingleItem={false} />
                       ))}
                     </div>
                   ) : (
