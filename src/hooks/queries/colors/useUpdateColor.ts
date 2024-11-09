@@ -13,18 +13,25 @@ export const useUpdateColor = () => {
 
 	const { mutate: updateColor, isPending: isLoadingUpdate } = useMutation({
 		mutationKey: ['update color'],
-		mutationFn: (data: IColorInput) =>
-			colorService.update(params.colorId, data),
+		mutationFn: (data: IColorInput) => {
+			if (params?.colorId) {
+				return colorService.update(params.colorId, data);
+			} else {
+				console.error("Color ID is missing");
+				return Promise.reject(new Error("Color ID is missing"));
+			}
+		},
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['get colors for store dashboard']
-			})
-			toast.success('Color updated')
+			});
+			toast.success('Color updated');
 		},
 		onError() {
-			toast.error('Error updating color')
+			toast.error('Error updating color');
 		}
-	})
+	});
+	
 
 	return useMemo(
 		() => ({ updateColor, isLoadingUpdate }),

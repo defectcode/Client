@@ -9,12 +9,26 @@ export const useGetStatistics = () => {
 
 	const { data: main } = useQuery({
 		queryKey: ['get main statistics'],
-		queryFn: () => statisticsService.getMain(params.storeId)
+		queryFn: () => {
+			if (params?.storeId) {
+				return statisticsService.getMain(params.storeId)
+			} else {
+				console.error("Store ID is missing for main statistics")
+				return Promise.reject(new Error("Store ID is missing"))
+			}
+		}
 	})
 
 	const { data: middle } = useQuery({
 		queryKey: ['get middle statistics'],
-		queryFn: () => statisticsService.getMiddle(params.storeId)
+		queryFn: () => {
+			if (params?.storeId) {
+				return statisticsService.getMiddle(params.storeId)
+			} else {
+				console.error("Store ID is missing for middle statistics")
+				return Promise.reject(new Error("Store ID is missing"))
+			}
+		}
 	})
 
 	return useMemo(() => ({ main, middle }), [main, middle])

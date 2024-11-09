@@ -13,8 +13,14 @@ export const useUpdateProduct = () => {
 
 	const { mutate: updateProduct, isPending: isLoadingUpdate } = useMutation({
 		mutationKey: ['update product'],
-		mutationFn: (data: IProductInput) =>
-			productService.update(params.productId, data),
+		mutationFn: (data: IProductInput) => {
+			if (params?.productId) {
+				return productService.update(params.productId, data)
+			} else {
+				console.error("Product ID is missing")
+				return Promise.reject(new Error("Product ID is missing"))
+			}
+		},
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['get products for store dashboard']

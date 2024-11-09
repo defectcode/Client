@@ -9,13 +9,18 @@ import { IReviewInput } from '@/shared/types/review.interface'
 
 export const useCreateReview = (storeId: string) => {
 	const params = useParams<{ id: string }>()
-
 	const queryClient = useQueryClient()
 
 	const { mutate: createReview, isPending: isLoadingCreate } = useMutation({
 		mutationKey: ['create review'],
-		mutationFn: (data: IReviewInput) =>
-			reviewService.create(data, params.id, storeId),
+		mutationFn: (data: IReviewInput) => {
+			if (params?.id) {
+				return reviewService.create(data, params.id, storeId)
+			} else {
+				console.error("Product ID is missing")
+				return Promise.reject(new Error("Product ID is missing"))
+			}
+		},
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['product']

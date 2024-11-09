@@ -5,18 +5,26 @@ import { useMemo } from 'react'
 import { productService } from '@/services/product.service'
 
 export const useGetProducts = () => {
-	const params = useParams<{ storeId: string }>()
+    const params = useParams<{ storeId: string }>()
 
-	const { data: products, isLoading } = useQuery({
-		queryKey: ['get products for store dashboard'],
-		queryFn: () => productService.getByStoreId(params.storeId)
-	})
+    const { data: products, isLoading } = useQuery({
+        queryKey: ['get products for store dashboard'],
+        queryFn: () => {
+            if (params?.storeId) {
+                return productService.getByStoreId(params.storeId)
+            } else {
+                console.error("Store ID is missing")
+                return Promise.resolve([]) // sau altă valoare implicită
+            }
+        },
+        enabled: !!params?.storeId // activează query-ul doar dacă storeId există
+    })
 
-	return useMemo(
-		() => ({
-			products,
-			isLoading
-		}),
-		[products, isLoading]
-	)
+    return useMemo(
+        () => ({
+            products,
+            isLoading
+        }),
+        [products, isLoading]
+    )
 }

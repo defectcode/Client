@@ -17,19 +17,28 @@ export const useCreateProduct = () => {
 
 	const { mutate: createProduct, isPending: isLoadingCreate } = useMutation({
 		mutationKey: ['create product'],
-		mutationFn: (data: IProductInput) =>
-			productService.create(data, params.storeId),
+		mutationFn: (data: IProductInput) => {
+			if (params?.storeId) {
+				return productService.create(data, params.storeId);
+			} else {
+				console.error("Store ID is missing");
+				return Promise.reject(new Error("Store ID is missing"));
+			}
+		},
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['get products for store dashboard']
-			})
-			toast.success('The product has been created')
-			router.push(STORE_URL.products(params.storeId))
+			});
+			toast.success('The product has been created');
+			if (params?.storeId) {
+				router.push(STORE_URL.products(params.storeId));
+			}
 		},
 		onError() {
-			toast.error('Error creating product')
+			toast.error('Error creating product');
 		}
-	})
+	});
+	
 
 	return useMemo(
 		() => ({

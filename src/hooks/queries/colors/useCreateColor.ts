@@ -18,13 +18,17 @@ export const useCreateColor = () => {
 	const { mutate: createColor, isPending: isLoadingCreate } = useMutation({
 		mutationKey: ['create color'],
 		mutationFn: (data: IColorInput) =>
-			colorService.create(data, params.storeId),
+			params?.storeId ? colorService.create(data, params.storeId) : Promise.reject(new Error('Store ID is missing')),		
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['get colors for store dashboard']
 			})
 			toast.success('Color created')
-			router.push(STORE_URL.colors(params.storeId))
+			if (params?.storeId) {
+				router.push(STORE_URL.colors(params.storeId));
+			} else {
+				console.error("Store ID is missing");
+			}			
 		},
 		onError() {
 			toast.error('Error creating color')

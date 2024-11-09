@@ -14,7 +14,7 @@ export const useUpdateCategory = () => {
 	const { mutate: updateCategory, isPending: isLoadingUpdate } = useMutation({
 		mutationKey: ['update category'],
 		mutationFn: (data: ICategoryInput) =>
-			categoryService.update(params.categoryId, data),
+			params?.categoryId ? categoryService.update(params.categoryId, data) : Promise.reject(new Error('Category ID is missing')),		
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['get categories for store dashboard']

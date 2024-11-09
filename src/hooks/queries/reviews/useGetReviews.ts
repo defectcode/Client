@@ -9,7 +9,14 @@ export const useGetReviews = () => {
 
 	const { data: reviews, isLoading } = useQuery({
 		queryKey: ['get reviews for store dashboard'],
-		queryFn: () => reviewService.getByStoreId(params.storeId)
+		queryFn: () => {
+			if (params?.storeId) {
+				return reviewService.getByStoreId(params.storeId)
+			} else {
+				console.error("Store ID is missing")
+				return Promise.reject(new Error("Store ID is missing"))
+			}
+		}
 	})
 
 	return useMemo(

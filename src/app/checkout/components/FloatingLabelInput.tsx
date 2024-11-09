@@ -1,6 +1,16 @@
 import { useState } from 'react';
 
-const FloatingLabelInput = ({ id, name, type, value, placeholder, onChange, error, required, getInputStyles }) => {
+const FloatingLabelInput = ({
+  id,
+  name,
+  type,
+  value,
+  placeholder,
+  onChange,
+  error,
+  required,
+  getInputStyles
+}: any) => {
   const [focused, setFocused] = useState(false);
 
   return (
