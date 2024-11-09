@@ -11,8 +11,9 @@ export function ColorEdit() {
 	const params = useParams<{ colorId: string }>()
 
 	const { data } = useQuery({
-		queryKey: ['get color'],
-		queryFn: () => colorService.getById(params.colorId)
+		queryKey: ['get color', params?.colorId], // Add params.colorId as part of the key for caching
+		queryFn: () => (params ? colorService.getById(params.colorId) : Promise.reject('No colorId')),
+		enabled: !!params?.colorId // Only run the query if colorId is available
 	})
 
 	return <ColorForm color={data} />
