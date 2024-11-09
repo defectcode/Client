@@ -28,8 +28,8 @@ export function Product({
 
   return (
     <div className="mx-auto max-w-[1400px]">
-      <div className="space-y-7 px-4 py-10 sm:px-6 lg:px-5">
-        <div className="lg:flex lg:items-start lg:gap-x-8">
+      <div className="space-y-7 px-4 py-10 sm:px-6 md:px-0">
+        <div className="lg:flex lg:items-start lg:gap-20">
           <div className="w-full lg:w-2/3">
             <ProductGallery product={product} />
             <div className="hidden lg:block mt-6">

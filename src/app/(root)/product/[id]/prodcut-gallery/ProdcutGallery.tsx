@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { IProduct } from '@/shared/types/product.interface';
 import { cn } from '@/utils/clsx';
 
+import './ProductGallery.css'
+
 interface ProductGalleryProps {
   product: IProduct;
 }
@@ -22,29 +24,40 @@ export function ProductGallery({ product }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col lg:flex-row lg:space-x-4">
-      <div className="hidden lg:flex lg:flex-col gap-4 lg:overflow-y-auto lg:h-[500px] justify-center lg:justify-start">
-        {product.images.map((image: string, index: number) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={cn(
-              "duration-300 border rounded-lg overflow-hidden w-16 h-16 lg:w-20 lg:h-20",
-              index === currentIndex ? 'border-black' : 'border-transparent'
-            )}
-          >
-        <Image src={image} alt={product.title} layout="responsive" width={80} height={80} />
-        </button>
-        ))}
-      </div>
+      <div
+  className="hidden lg:flex lg:flex-col gap-3 overflow-y-auto no-scrollbar custom-scrollbar"
+  style={{
+    maxHeight: "758px", // limitează înălțimea containerului
+  }}
+>
+  {product.images.map((image: string, index: number) => (
+    <button
+      key={index}
+      onClick={() => setCurrentIndex(index)}
+      className={cn(
+        "duration-300 border rounded-lg overflow-hidden",
+        index === currentIndex ? 'border-black' : 'border-transparent'
+      )}
+      style={{
+        width: "104px",
+        height: "104px",
+        flexShrink: 0, // împiedică butoanele să-și modifice dimensiunile
+      }}
+    >
+      <Image src={image} alt={product.title} layout="fixed" width={104} height={104} />
+    </button>
+  ))}
+</div>
+
 
       {/* Imaginea principală */}
       <div className="relative">
         <Image
           src={product.images[currentIndex]}
           alt={product.title}
-          width={886}
-          height={886}
-          className="rounded-lg lg:h-[886px] h-auto w-full"
+          width={758}
+          height={758}
+          className="rounded-lg lg:h-[758px] lg:w-[758px] h-auto w-full"
         />
 
         {/* Butoanele de navigare pentru desktop (în colțul din dreapta jos) */}

@@ -19,9 +19,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
 	return (
 		<Button
-		variant='primary'
-		size='lg'
-		className="bg-gradient-to-r from-pink-300 to-orange-300 text-black rounded-full md:w-[393px] w-full font-heebo" // w-full pentru mobil
+		className="bg-transparent text-[#1E1E1E] border rounded-[16px] max-w-[393px] h-[48px] w-full font-heebo" // w-full pentru mobil
 		onClick={() =>
 			currentElement
 			? removeFromCart({ id: currentElement.id })

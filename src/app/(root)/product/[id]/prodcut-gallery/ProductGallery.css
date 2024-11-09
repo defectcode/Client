@@ -1,0 +1,40 @@
+/* Ascunde bara de scroll implicită pe webkit (Chrome, Safari) */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE și Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  /* Stil personalizat pentru scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 2px; /* Lățimea barei de scroll */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* Fundalul barei */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #bdbdbd; /* Culoarea thumb-ului */
+    border-radius: 10px; /* Rotunjirea colțurilor */
+    border: 2px solid transparent; /* Spațiu între thumb și marginea barei */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #8c8c8c; /* Culoarea thumb-ului la hover */
+  }
+  
+
+  .fixed-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; /* Ajustează înălțimea după cum dorești */
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0));
+    pointer-events: none; /* Pentru a preveni interacțiunea cu gradientul */
+  }
+  

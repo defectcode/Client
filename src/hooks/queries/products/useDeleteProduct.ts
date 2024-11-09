@@ -15,7 +15,7 @@ export const useDeleteProduct = () => {
 
 	const { mutate: deleteProduct, isPending: isLoadingDelete } = useMutation({
 		mutationKey: ['delete product'],
-		mutationFn: () => productService.delete(params.productId),
+		mutationFn: () => productService.delete(params.storeId),
 		onSuccess() {
 			queryClient.invalidateQueries({
 				queryKey: ['get products for store dashboard']

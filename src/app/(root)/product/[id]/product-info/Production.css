@@ -1,0 +1,22 @@
+.font-Heebo-16 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+
+.font-Heebo-reg-16 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+
+.font-Heebo-15-light {
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 15px;
+}
