@@ -47,14 +47,14 @@ export function Products() {
 							description='All products in your store'
 						/>
 						<div className={styles.buttons}>
-							<Link
-								href={STORE_URL.productCreate(params.storeId)}
-							>
-								<Button variant='primary'>
-									<Plus />
-									Create
-								</Button>
-							</Link>
+							{params?.storeId && (
+								<Link href={STORE_URL.productCreate(params.storeId)}>
+									<Button variant='primary'>
+										<Plus />
+										Create
+									</Button>
+								</Link>
+							)}
 						</div>
 					</div>
 					<div className={styles.table}>

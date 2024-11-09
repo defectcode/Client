@@ -53,22 +53,16 @@ export function ProductForm({ product, categories, colors }: ProductFormProps) {
 
 	const form = useForm<IProductInput>({
 		mode: 'onChange',
-		values: {
+		defaultValues: {
 			title: product?.title || '',
 			description: product?.description || '',
 			images: product?.images || [],
 			price: product?.price || 0,
-			categoryId: product?.category.id || '',
-			colorId: product?.color.id || ''
-		} || {
-			title: '',
-			description: '',
-			images: [],
-			price: 0,
-			categoryId: '',
-			colorId: ''
+			categoryId: product?.category?.id || '',
+			colorId: product?.color?.id || ''
 		}
 	})
+	
 
 	const onSubmit: SubmitHandler<IProductInput> = data => {
 		data.price = Number(data.price)
