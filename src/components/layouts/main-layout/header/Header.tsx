@@ -22,15 +22,18 @@ export function Header() {
   }
 
   return (
-    <div className="md:p-5 p-0 max-w-[1400px] w-full md:h-full h-[60px] flex items-center justify-between bg-transparent mx-auto">
+    <div className="md:py-5 p-0 max-w-[1400px] w-full md:h-full h-[60px] flex items-center justify-between bg-transparent mx-auto">
       
       {/* Versiunea Desktop */}
       <div className="flex-1 lg:block hidden">
         <HeaderMenu />
       </div>
-      <div className="flex-1 flex justify-center lg:block hidden">
-        <Logo />
+      <div className="flex-1 lg:block hidden relative">
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <Logo />
+        </div>
       </div>
+
       <div className="flex-1 flex items-center justify-end lg:flex hidden">
         <SearchInput />
         <User />
@@ -41,17 +44,14 @@ export function Header() {
       
       {/* Versiunea Mobilă */}
       <div className="flex items-center justify-between w-full lg:hidden p-4">
-        {/* Icona Acasă */}
         <Link href="/" className="p-2">
           <Image src="/images/home.svg" alt="home" width={20} height={20} />
         </Link>
         
-        {/* Logo-ul Centrat Absolut pentru Mobil */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <h1 className="font-bold text-lg">vellov</h1>
         </div>
         
-        {/* Icone Căutare, Utilizator, Coș */}
         <div className="flex items-center gap-4">
           <button className="p-2">
             <Image src="/images/search.svg" alt="search" width={20} height={20} />

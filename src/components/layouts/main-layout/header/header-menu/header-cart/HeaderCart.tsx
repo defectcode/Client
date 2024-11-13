@@ -37,7 +37,7 @@ export function HeaderCart() {
           <div className="flex flex-col bg-[#F9F9F9] m-0 w-full flex-1 max-h-[450px] overflow-y-auto custom-scrollbar p-4">
             {items.length ? (
               items.map((item) => (
-                <CartItem item={item} key={item.id} />
+                <CartItem item={item} key={item.id} isLastItem={false} isSingleItem={false} />
               ))
             ) : (
               <div className="text-sm text-muted-foreground">The cart is empty!</div>

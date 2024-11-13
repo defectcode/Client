@@ -35,7 +35,7 @@ export function FavoriteButton({ product }: FavoriteButtonProps) {
 
 	return (
 		<Button
-			className='bg-transparent'
+			className='bg-transparent h-[24px]'
 			variant='secondary'
 			size='icon'
 			onClick={() => mutate()}

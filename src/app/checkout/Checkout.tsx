@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Header } from '@/components/layouts/main-layout/header/Header';
-import { CheckoutCart } from '../../../src/components/layouts/main-layout/header/header-menu/header-cart/CheckoutCart';
 import { useProfile } from '@/hooks/useProfile';
 import { useCart } from '@/hooks/useCart';
 import { CountrySelect } from './components/CountrySelect'; // Importăm componenta CountrySelect
@@ -10,10 +8,8 @@ import { parsePhoneNumberFromString, CountryCode } from 'libphonenumber-js'; // 
 import Image from 'next/image'; // Pentru logo-urile PayPal, Apple Pay etc.
 import Order from '../../components/layouts/main-layout/header/header-menu/header-cart/cart-item/components/order/Order';
 import CheckoutPage from '@/components/layouts/main-layout/header/header-menu/header-cart/cart-item/components/order/StripePaymentButton';
-import PayPalButton from '@/components/layouts/main-layout/header/header-menu/header-cart/cart-item/PayPalButton';
 import { InfoHeader } from '@/components/layouts/main-layout/header/InfoHeader';
 import { CheckoutCartHeader } from '@/components/layouts/main-layout/header/header-menu/header-cart/CheckoutCartHeader';
-import { clsx } from 'clsx';
 import FooterCheckout from './components/FooterCheckout';
 import FloatingLabelInput from './components/FloatingLabelInput';
 
@@ -199,13 +195,12 @@ export function Checkout() {
         console.log('Email sent successfully:', data);
     } catch (error) {
         console.error('Error while sending email:', error);
-        return; // Oprește execuția dacă există o eroare
+        return;
     }
 
-    // Setează stările pentru a indica faptul că formularul a fost trimis și că secțiunea de plată trebuie afișată
     setIsSubmitted(true);
     setIsEditing(false);
-    setIsPaymentVisible(true); // Setează starea pentru a afișa secțiunea de plată
+    setIsPaymentVisible(true);
 };
 
   
@@ -214,8 +209,8 @@ export function Checkout() {
 
   //Total:
   const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const taxRate = 0.2; // De exemplu, 20% taxe
-  const totalAmount = subtotal + subtotal * taxRate; // Calcul total cu taxe
+  const taxRate = 0.2; 
+  const totalAmount = subtotal + subtotal * taxRate; 
 
   
   const getInputStyles = (error: string) => {
@@ -264,7 +259,7 @@ export function Checkout() {
             {isExpressCheckoutVisible && (
               <>
                 <div className="flex flex-col gap-5 mb-6">
-                  <div className="flex gap-5 md:h-[56px] h-10">
+                  <div className="flex gap-[15px] md:h-[56px] h-10">
                     <button className="w-full py-2 border rounded-[10px] bg-[#00457C] flex items-center justify-center">
                       <Image src='/images/paypal.svg' alt='PayPal' width={69} height={18} className='md:w-[69px] md:h-[18px] w-[48px] h-[13px]' />
                     </button>
@@ -307,7 +302,6 @@ export function Checkout() {
           {/* <Order items={items} /> */}
         </div>
         <div className="w-full lg:w-1/3 md:p-4 md:block hidden">
-          {/* <CheckoutCart /> */}
           <div className="p-4 text-[14px] font-heebo leading-[14px]">
             <h1 className="font-Heebo-16 mb-[5px] text-[#1E1E1E]">Keep in mind:</h1>
             <ul className="list-disc pl-4 text-[#6F6F6F]">
@@ -317,14 +311,6 @@ export function Checkout() {
               </li>
             </ul>
           </div>
-          {/* <div className='space-y-[48px] leading-[14px]'>
-            <div className='text-[14px] font-heebo text-[#6F6F6F] md:mt-[565px]'>
-              <p>We’ll email you a receipt and send order updates to your mobile phone via SMS or iMessage.</p>
-            </div>
-            <div className='text-[14px] font-heebo text-[#6F6F6F]'>
-              <p>The phone number you enter can't be changed after you place your order, so please make sure it's correct.</p>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
@@ -374,14 +360,14 @@ export function Checkout() {
               Want to check out faster? {isExpressCheckoutVisible ? '' : ''}
             </button>
             <button
-              className="w-full text-left pb-5 font-Heebo-18 text-[#1e1e1e] md:mt-0 mt-10 md:hidden"
+              className="w-full text-left pb-5 font-Heebo-18 text-[#424242] md:mt-0 mt-10 md:hidden"
             >
               Want to check out faster? {isExpressCheckoutVisible ? '' : ''}
             </button>
             {isExpressCheckoutVisible && (
              <>
                 <div className="flex flex-col gap-5 mb-6">
-                  <div className="flex gap-5 md:h-[56px] h-10">
+                  <div className="flex gap-[15px] md:h-[56px] h-10">
                     <button className="w-full py-2 border rounded-[10px] bg-[#00457C] flex items-center justify-center">
                       <Image src='/images/paypal.svg' alt='PayPal' width={69} height={18} className='md:w-[69px] md:h-[18px] w-[48px] h-[13px]' />
                     </button>
@@ -394,7 +380,6 @@ export function Checkout() {
                       <CheckoutPage/>
                     </button>
                   </div>
-                  <p className='font-Heebo-reg-12 md:hidden block'>Complete your purchase in just one click with <span className='font-Heebo-bold-12'>Express Checkout</span>.</p>
                 </div>
                 <div className="flex items-center justify-between md:mt-5 mt-10">
                   <div className="flex-1 border-t border-gray-300"></div>
@@ -406,10 +391,10 @@ export function Checkout() {
 
             <h2 className="font-Heebo-24-- mb-5 text-[#1E1E1E] mt-[40px] md:block hidden">Where should we send your order?</h2>
             <h2 className="font-Heebo-18 mb-5 text-[#1E1E1E] mt-[40px] md:hidden block">When will your order arrive?</h2>
-            <form onSubmit={handleSubmit} className="space-y-2.5 md:space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-2.5 md:space-y-5 h-full">
               {/* First Name and Last Name Fields */}
               <div className="flex md:gap-5 gap-[10px] md:h-[56px] max-w-[520px] md:flex-row flex-col">
-                  <div className="w-full md:h-full h-[56px]">
+                  <div className="w-full md:h-full h-[56px] md:block hidden">
                       <FloatingLabelInput
                           type="text"
                           id="firstName"
@@ -421,11 +406,9 @@ export function Checkout() {
                           required
                           getInputStyles={getInputStyles}
                       />
-                      {errors.firstName && (
-                          <p className="text-red-500 text-sm mt-1 mb-6">{errors.firstName}</p> // Increased mb-6 for spacing
-                      )}
+
                   </div>
-                  <div className="w-full md:h-full h-[56px]">
+                  <div className="w-full md:h-full h-[56px] md:block hidden">
                       <FloatingLabelInput
                           type="text"
                           id="lastName"
@@ -437,50 +420,39 @@ export function Checkout() {
                           required
                           getInputStyles={getInputStyles}
                       />
-                      {errors.lastName && (
-                          <p className="text-red-500 text-sm mt-1 mb-6">{errors.lastName}</p> // Increased mb-6 for spacing
-                      )}
+
                   </div>
               </div>
 
-              {/* Company Field (conditionally shown) */}
-              {showCompanyInput && (
-                  <div className="w-full">
-                      <FloatingLabelInput
-                          type="text"
-                          id="company"
-                          name="company"
-                          value={shippingData.company}
-                          onChange={handleChange}
-                          placeholder="Company Name (optional)"
-                          error={errors.company}
-                          required
-                          getInputStyles={getInputStyles}
-                      />
-                      {errors.company && (
-                          <p className="text-red-500 text-sm mt-1 mb-6">{errors.company}</p> // Increased mb-6 for spacing
-                      )}
-                  </div>
-              )}
-              {/* Company Field (conditionally shown) */}
-              {showCompanyInput && (
-                  <div className="w-full">
-                      <FloatingLabelInput
-                          type="text"
-                          id="company"
-                          name="company"
-                          value={shippingData.company}
-                          onChange={handleChange}
-                          placeholder="Company Name (optional)"
-                          error={errors.company}
-                          required
-                          getInputStyles={getInputStyles}
-                      />
-                      {errors.company && (
-                          <p className="text-red-500 text-sm mt-1 mb-6">{errors.company}</p> // Increased mb-6 for spacing
-                      )}
-                  </div>
-              )}
+              <div className='md:hidden'>
+                <FloatingLabelInput
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={shippingData.firstName}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                  error={errors.firstName}
+                  required
+                  getInputStyles={getInputStyles}
+                  
+                />
+               </div>
+
+              <div className='md:hidden'>
+                <FloatingLabelInput
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={shippingData.lastName}
+                    onChange={handleChange}
+                    placeholder="Last Name"
+                    error={errors.lastName}
+                    required
+                    getInputStyles={getInputStyles}
+                />
+              </div>
+            
 
               {/* Address Field */}
               <div className="w-full">
@@ -495,95 +467,99 @@ export function Checkout() {
                       required
                       getInputStyles={getInputStyles}
                   />
-                  {errors.address && (
-                      <p className="text-red-500 text-sm mt-1 mb-6">{errors.address}</p> // Increased mb-6 for spacing
-                  )}
               </div>
 
-              {/* City, Country, and Zip Code Fields */}
-              <div className="flex md:gap-[20px] gap-[10px] md:h-[56px] max-w-[520px] flex-col sm:flex-row">
-                  <div className="w-full md:h-full h-[56px]">
-                      <FloatingLabelInput
-                        type="text"
-                        id="city"
-                        name="city"
-                        value={shippingData.city}
-                        onChange={handleChange}
-                        placeholder="City/Town"
-                        error={errors.city}
-                        required
-                        getInputStyles={getInputStyles}
-                      />
-                      {errors.city && (
-                          <p className="text-red-500 text-sm mt-1 mb-6">{errors.city}</p> // Increased mb-6 for spacing
-                      )}
-                  </div>
-
-                  {/* Country Select */}
-                  <div className={`w-full h-[56px] flex items-center py-2 rounded-[10px] text-[14px] font-heebo placeholder-[#6F6F6F]  ${getInputStyles(errors.country)}`}>
-                    <CountrySelect
-                      selectedCountry={shippingData.country}
-                      onCountryChange={handleCountryChange}
-                    />
-                  </div>
-                   
-                  <div className="w-full md:h-full h-[56px]">
-                      <FloatingLabelInput
-                          type="text"
-                          id="zip"
-                          name="zip"
-                          value={shippingData.zip}
-                          onChange={handleChange}
-                          placeholder="Zip code"
-                          error={errors.zip}
-                          required
-                          getInputStyles={getInputStyles}
-                      />
-                      {errors.zip && (
-                          <p className="text-red-500 text-sm mt-1 mb-6">{errors.zip}</p> // Increased mb-6 for spacing
-                      )}
-                  </div>
-              </div>
-
-
-              <div className="flex items-center cursor-pointer text-[#6F6F6F] text-[14px] font-heebo md:block hidden mt-0" onClick={handleToggleCompanyInput}>
-                  {!showCompanyInput && (
-                    <div className='flex items-center relative'>
-                      <span className="mr-1">+</span>
-                      <span>Add Company Name</span>
-                      <span
-                        className="ml-2 cursor-pointer relative"
-                        onMouseEnter={() => setShowTooltip(true)}
-                        onMouseLeave={() => setShowTooltip(false)}
-                      >
-                        <Image src="/images/question-icon.svg" alt="info" width={22} height={22} className='' />
-                        {showTooltip && (
-                          <div className="absolute bg-gray-100 text-gray-700 text-sm p-3 rounded-[10px] shadow-lg w-[250px] -left-1/2 transform -translate-x-1/2 bottom-full mb-2 z-50 font-Heebo-reg-12">
-                            The sales tax listed on the checkout page is only an estimate. Your invoice will contain the final sales tax, including state and local taxes, as well as any applicable rebates or fees. 
-                          </div>
-                        )}
-                      </span>
+                 {/* City, Country, and Zip Code Fields */}
+                 <div className="flex md:gap-[20px] gap-[10px] max-w-[520px] flex-col sm:flex-row">
+                     <div className="w-full h-[56px] mb-0">
+                         <FloatingLabelInput
+                            type="text"
+                            id="city"
+                            name="city"
+                            value={shippingData.city}
+                            onChange={handleChange}
+                            placeholder="City/Town"
+                            required
+                            getInputStyles={getInputStyles}
+                        />
+                        {errors.city && <p className="text-red-500 text-xs">{errors.city}</p>}
                     </div>
+
+                    {/* Country Select */}
+                    <div className={`w-full h-[56px] flex items-center py-2 rounded-[10px] text-[14px] font-heebo placeholder-[#6F6F6F] ${getInputStyles(errors.country)}`}>
+                        <CountrySelect
+                            selectedCountry={shippingData.country}
+                            onCountryChange={handleCountryChange}
+                        />
+                    </div>
+
+                    <div className="w-full">
+                        <FloatingLabelInput
+                            type="text"
+                            id="zip"
+                            name="zip"
+                            value={shippingData.zip}
+                            onChange={handleChange}
+                            placeholder="Zip code"
+                            error={errors.zip}
+                            required
+                            getInputStyles={getInputStyles}
+                        />
+                    </div>
+                </div>
+
+
+
+                {/* Add Company Name section with conditional margin */}
+                <div 
+                    className={`flex items-center cursor-pointer text-[#6F6F6F] text-[14px] md:hidden font-heebo transition-all duration-200`}
+                    onClick={handleToggleCompanyInput}
+                >
+                  {!showCompanyInput && (
+                      <div className="flex items-center relative mt-2">
+                          <span className="mr-1">+</span>
+                          <span>Add Company Name</span>
+                          <span
+                              className="ml-2 cursor-pointer relative"
+                              onMouseEnter={() => setShowTooltip(true)}
+                              onMouseLeave={() => setShowTooltip(false)}
+                          >
+                              <Image src="/images/question-icon.svg" alt="info" width={22} height={22} className='' />
+                              {showTooltip && (
+                                  <div className="absolute bg-gray-100 text-gray-700 text-sm p-3 rounded-[10px] shadow-lg w-[250px] -left-1/2 transform -translate-x-1/2 bottom-full mb-2 z-50">
+                                      The sales tax listed on the checkout page is only an estimate. Your invoice will contain the final sales tax, including state and local taxes, as well as any applicable rebates or fees.
+                                  </div>
+                              )}
+                          </span>
+                      </div>
                   )}
                 </div>
 
+
+
                 {showCompanyInput && (
-                  <div className="mb-5 max-w-[520px] w-full md:block hidden">
-                    <FloatingLabelInput
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={shippingData.company || ''}
-                      onChange={handleChange}
-                      placeholder="Company Name (optional)"
-                      error={errors.company}
-                      required
-                      getInputStyles={getInputStyles}
-                    />
-                  </div>
+                    <div className="w-full md:hidden">
+                        <FloatingLabelInput
+                            type="text"
+                            id="company"
+                            name="company"
+                            value={shippingData.company}
+                            onChange={handleChange}
+                            placeholder="Company Name (optional)"
+                            error={errors.company}
+                            required
+                            getInputStyles={getInputStyles}
+                        />
+                        {errors.company && (
+                            <p className="text-red-500 text-sm mt-1 mb-6">{errors.company}</p> // Increased mb-6 for spacing
+                        )}
+                    </div>
                 )}
 
-                <div className="flex items-center cursor-pointer text-[#6F6F6F] text-[14px] font-heebo md:hidden block md:mb-0" onClick={handleToggleCompanyInput}>
+                
+
+
+                <div className="flex items-center cursor-pointer text-[#6F6F6F] text-[14px] font-heebo md:mb-0 md:block hidden" onClick={handleToggleCompanyInput}>
                   {!showCompanyInput && (
                     <div className='flex items-center relative mt-[10px]'>
                       <span className="mr-2">+</span>
@@ -604,24 +580,25 @@ export function Checkout() {
                   )}
                 </div>
 
+                {/* Company Field (conditionally shown) */}
                 {showCompanyInput && (
-                  <div className="mb-5 max-w-[511px] w-full md:hidden block">
-                    <FloatingLabelInput
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={shippingData.company || ''}
-                      onChange={handleChange}
-                      placeholder="Company Name (optional)"
-                      error={errors.company}
-                      required
-                      getInputStyles={getInputStyles}
-                    />
-                  </div>
+                    <div className="w-full md:block hidden">
+                        <FloatingLabelInput
+                            type="text"
+                            id="company"
+                            name="company"
+                            value={shippingData.company}
+                            onChange={handleChange}
+                            placeholder="Company Name (optional)"
+                            error={errors.company}
+                            required
+                            getInputStyles={getInputStyles}
+                        />
+                    </div>
                 )}
 
                 <h2 className="font-Heebo-24-- text-[#1E1E1E] md:pt-5 pt-[30px] md:block hidden">How can we reach you?</h2>
-                <h2 className="font-Heebo-18 text-[#1E1E1E] md:pt-5 pt-[30px] md:hidden">How can we reach you?</h2>
+                <h2 className="font-Heebo-18 text-[#1E1E1E] md:pt-5 pt-[20px] md:hidden">How can we reach you?</h2>
                 <FloatingLabelInput
                   type="email"
                   id="email"
@@ -636,6 +613,7 @@ export function Checkout() {
                 <div className='text-[14px] font-heebo text-[#1E1E1E] md:mt-[520px] md:hidden font-Heebo-reg-12'>
                   <p className='mb-5'>We’ll send your receipt and updates by email.</p>
                 </div>
+                 
 
                 <FloatingLabelInput
                   type="tel"
@@ -652,7 +630,9 @@ export function Checkout() {
                   <p className='mb-[30px]'>Make sure your phone number is correct. It can’t be changed.</p>
                 </div>
 
-              {/* Submit Button */}
+                
+
+                
               <button
                   type="submit"
                   className={`bg-[#E5E5E5] py-2 h-[56px] rounded-[10px] w-full font-Heebo-16 text-[#9E9EA0] ${isFormValid ? 'bg-black text-white' : 'opacity-50 cursor-not-allowed text-white'}`}
@@ -660,6 +640,7 @@ export function Checkout() {
               >
                   Continue to Payment
               </button>
+              
           </form>
 
           <div className='mt-10'>

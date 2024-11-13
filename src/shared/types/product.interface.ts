@@ -3,6 +3,7 @@ import { IColor } from './color.interface'
 import { IReview } from './review.interface'
 
 export interface IProduct {
+  availableColors: any
 	id: string
 	title: string
 	description: string
