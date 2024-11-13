@@ -45,22 +45,22 @@ export function Header() {
       {/* Versiunea Mobilă */}
       <div className="flex items-center justify-between w-full lg:hidden p-4">
         <Link href="/" className="p-2">
-          <Image src="/images/home.svg" alt="home" width={20} height={20} />
+          <Image src="/images/home.svg" alt="home" width={15} height={15} />
         </Link>
         
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <h1 className="font-bold text-lg">vellov</h1>
+          <Logo />
         </div>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <button className="p-2">
-            <Image src="/images/search.svg" alt="search" width={20} height={20} />
+            <Image src="/images/search.svg" alt="search" width={11} height={14} />
           </button>
           <button className="p-2">
-            <Image src="/images/user.svg" alt="user" width={20} height={20} />
+            <Image src="/images/user.svg" alt="user" width={14} height={14} />
           </button>
           <button onClick={toggleCart} className="p-2">
-            <Image src="/images/shop.svg" alt="cart" width={20} height={20} />
+            <Image src="/images/shop.svg" alt="cart" width={13} height={15} />
           </button>
         </div>
       </div>
