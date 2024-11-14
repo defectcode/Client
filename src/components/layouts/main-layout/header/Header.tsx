@@ -8,6 +8,7 @@ import { SearchInput } from './search-input/SearchInput'
 import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
 import { User } from './header-menu/header-cart/cart-item/user'
+import { CheckoutForProduct } from './header-menu/header-cart/CheckoutForProduct'
 
 export function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -52,7 +53,7 @@ export function Header() {
           <Logo />
         </div>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <button className="p-2">
             <Image src="/images/search.svg" alt="search" width={11} height={14} />
           </button>
@@ -67,7 +68,7 @@ export function Header() {
 
       {/* Coșul de cumpărături (vizibil atât pe mobil, cât și pe desktop) */}
       {isCartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg max-w-[430px] w-full relative">
             <button 
               className="absolute top-5 right-5 text-2xl font-bold" 
@@ -75,7 +76,7 @@ export function Header() {
             >
               <Image src='/images/close.svg' alt='close' width={12} height={12}/>
             </button>
-            <HeaderCart />
+            <CheckoutForProduct />
           </div>
         </div>
       )}

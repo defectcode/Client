@@ -7,7 +7,6 @@ interface CountrySelectProps {
 }
 
 export function CountrySelect({ selectedCountry, onCountryChange }: CountrySelectProps) {
-  // Tipul `Country` este importat din `country-list`, acesta reprezintă fiecare țară
   const countries: Country[] = countryList.getData();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -11,3 +11,42 @@
     background: transparent;
   }
   
+
+
+  .shadow-container {
+    position: relative;
+    background-color: #F9F9F9;
+    max-height: calc(100vh - 112px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .scroll-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  /* Gradients for the top and bottom */
+  .shadow-top,
+  .shadow-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 20px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .shadow-top {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+  }
+  
+  .shadow-bottom {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+  }
+  

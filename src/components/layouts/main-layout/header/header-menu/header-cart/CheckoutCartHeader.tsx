@@ -1,3 +1,5 @@
+
+
 import { useEffect, useState } from 'react';
 import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/utils/string/format-price';
@@ -51,7 +53,7 @@ export function CheckoutCartHeader() {
         {isSummaryVisible ? (
           // Render Logo and Summary inside the drawer when open
           <div className="absolute inset-x-0 top-0 bg-white z-50 py-4 px-5 flex items-center justify-between border-b">
-            <div className="w-[77px] h-[18px]">
+            <div className="">
               <Logo />
             </div>
             <div
@@ -73,7 +75,7 @@ export function CheckoutCartHeader() {
         ) : (
           // Render Logo and Summary as usual in the header when summary is closed
           <div className="flex items-center justify-between bg-[#F9F9F9] px-5 py-4 w-full">
-            <div className="w-[77px] h-[18px]">
+            <div className="">
               <Logo />
             </div>
             <div className="flex items-center gap-2 text-[16px] font-Heebo-med text-[#1E1E1E]" onClick={handleToggleSummary}>
@@ -92,7 +94,7 @@ export function CheckoutCartHeader() {
 
         {/* Drawer for Summary */}
         <div
-          className={`fixed inset-x-0 top-0 transform transition-all duration-300 ease-in-out bg-white shadow-lg z-50 mt-12 ${
+          className={`fixed inset-x-0 top-0 transform transition-all duration-300 ease-in-out bg-white shadow-lg z-50 mt-[72px] ${
             isSummaryVisible ? 'max-h-[80vh] opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-5'
           }`}
           style={{
@@ -105,6 +107,7 @@ export function CheckoutCartHeader() {
         >
           <div className="pb-5">
             <div className="p-5 relative overflow-y-auto" style={{ maxHeight: '300px' }}>
+            <div className="absolute top-0 left-0 right-0 h-5 bg-gradient-to-b from-black/10 to-transparent z-10"></div>
               {items.length ? (
                 items.map((item, index) => (
                   <CheckoutCartItem
@@ -117,6 +120,7 @@ export function CheckoutCartHeader() {
               ) : (
                 <div className="text-sm text-muted-foreground">The cart is empty!</div>
               )}
+            <div className="absolute bottom-0 left-0 right-0 h-5 bg-gradient-to-t from-black/10 to-transparent z-10"></div>
             </div>
 
 
@@ -202,7 +206,7 @@ export function CheckoutCartHeader() {
                   </div>
                   <div className="shadow-container">
                     <div className="shadow-top"></div> {/* Gradientul de sus */}
-                    
+                    <div className="absolute top-0 left-0 right-0 h-5 bg-gradient-to-b from-black/10 to-transparent z-10"></div>
                     <div className="scroll-content no-scrollbar custom-scrollbar">
                       {items.length ? (
                         items.map((item, index) => (
@@ -217,6 +221,7 @@ export function CheckoutCartHeader() {
                         <div className="text-sm text-muted-foreground">The cart is empty!</div>
                       )}
                     </div>
+                    <div className="absolute bottom-0 left-0 right-0 h-5 bg-gradient-to-t from-black/10 to-transparent z-10"></div>
 
                     <div className="shadow-bottom"></div> {/* Gradientul de jos */}
                   </div>

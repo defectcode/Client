@@ -17,7 +17,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
   const handleAddToCart = () => {
     setIsCheckoutCartVisible(true); // Arată CheckoutCartHeader
-    setTimeout(() => setIsCheckoutCartVisible(false), 5000); // Ascunde după 7 secunde
+    setTimeout(() => setIsCheckoutCartVisible(false), 4000);
   };
 
   const rating =
@@ -32,10 +32,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
         <h1 className="font-Heebo-24 text-black bg-clip-tex">
           {product.title}
         </h1>
-		<div className="flex items-center justify-center font-Heebo-reg-13 text-[#5D5D5D] md:hidden">{formatPrice(product.price)}</div>	
-        <div className='md:block hidden'>
-			<FavoriteButton product={product} />
-		</div>
+        <div className="flex items-center justify-center font-Heebo-reg-13 text-[#5D5D5D] md:hidden">{formatPrice(product.price)}</div>	
+            <div className='md:block hidden'>
+          <FavoriteButton product={product} />
+        </div>
       </div>
       <div className="flex items-center mb-5">
         <Link className="font-Heebo-reg-16 text-[#8C8C8C]" href={PUBLIC_URL.category(product.category.id)}>
@@ -48,14 +48,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
         <span className="font-Heebo-reg-14 md:block hidden">{product.color.name}</span>
       </div>
       <div className="flex items-center gap-x-4 mb-5">
-		<div className="flex items-center justify-between w-full gap-x-2 md:flex-row">
-			<div
-			className="w-6 h-6 rounded-full border border-gray-600"
-			style={{ backgroundColor: product.color.value }}
-			/>
-				<span className="font-Heebo-reg-14 md:hidden">{product.color.name}</span>
-			</div>
-	</div>
+        <div className="flex items-center justify-between w-full gap-x-2 md:flex-row">
+          <div
+          className="w-6 h-6 rounded-full border border-gray-600"
+          style={{ backgroundColor: product.color.value }}
+          />
+          <span className="font-Heebo-reg-14 md:hidden">{product.color.name}</span>
+        </div>
+	    </div>
 
       <h1 className='text-[#5D5D5D] font-Heebo-reg-16 mb-5'>Description</h1>
       <p className="font-Heebo-15-light text-[#8C8C8C] max-w-[393px] w-full mb-10">{product.description}</p>
@@ -67,7 +67,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           </button>
         </div>
       </div>
-      {isCheckoutCartVisible && <CheckoutForProduct />} {/* Afișează CheckoutForProduct dacă isCheckoutCartVisible este true */}
+      {isCheckoutCartVisible && <CheckoutForProduct />}
     </div>
   );
 }
